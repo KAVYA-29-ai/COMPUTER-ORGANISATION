@@ -1,0 +1,2459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COA Exam Tutor — Complete Syllabus</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #060c18;
+  --panel: #0b1626;
+  --card: #0f1d30;
+  --border: #1a3050;
+  --text: #e2e8f0;
+  --muted: #64748b;
+  --cyan: #00e5ff;
+  --pink: #ff3d7f;
+  --gold: #fbbf24;
+  --green: #10d9a0;
+  --purple: #a855f7;
+  --orange: #f97316;
+  --blue: #3b82f6;
+  --red: #ef4444;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'Sora', sans-serif; display: flex; height: 100vh; overflow: hidden; }
+code, .mono { font-family: 'JetBrains Mono', monospace; }
+
+/* SIDEBAR */
+#sidebar {
+  width: 260px; min-width: 260px; background: var(--panel);
+  border-right: 1px solid var(--border); display: flex; flex-direction: column;
+  overflow: hidden;
+}
+#sidebar-header {
+  padding: 18px 16px 12px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, #0b1a2e, #0d2040);
+}
+#sidebar-header .logo { font-size: 17px; font-weight: 800; background: linear-gradient(90deg, var(--cyan), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+#sidebar-header .sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
+#nav { overflow-y: auto; flex: 1; padding: 8px 0; }
+#nav::-webkit-scrollbar { width: 4px; }
+#nav::-webkit-scrollbar-track { background: transparent; }
+#nav::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.nav-group { padding: 8px 12px 4px; font-size: 10px; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; }
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 14px; cursor: pointer; border: none; background: transparent;
+  width: 100%; text-align: left; border-left: 3px solid transparent;
+  transition: all 0.15s; color: #475569;
+}
+.nav-item:hover { background: #0d1f35; color: #94a3b8; }
+.nav-item.active { border-left-color: var(--cyan); background: #0d2440; color: var(--cyan); }
+.nav-item .icon { font-size: 15px; min-width: 20px; text-align: center; }
+.nav-item .label { font-size: 12px; font-weight: 600; line-height: 1.3; }
+.nav-item .num { font-size: 10px; color: var(--muted); font-family: 'JetBrains Mono', monospace; margin-left: auto; min-width: 22px; text-align: right; }
+
+/* MAIN */
+#main { flex: 1; overflow-y: auto; display: flex; flex-direction: column; }
+#main::-webkit-scrollbar { width: 5px; }
+#main::-webkit-scrollbar-track { background: var(--bg); }
+#main::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+.topic-page { display: none; padding: 28px 32px 40px; max-width: 920px; animation: fadeUp 0.35s ease; }
+.topic-page.active { display: block; }
+@keyframes fadeUp { from { opacity:0; transform: translateY(14px); } to { opacity:1; transform: translateY(0); } }
+
+/* COMMON COMPONENTS */
+.topic-header { margin-bottom: 24px; }
+.topic-tag { font-size: 10px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-bottom: 6px; }
+.topic-title { font-size: 26px; font-weight: 800; margin-bottom: 6px; }
+.topic-desc { font-size: 14px; color: #94a3b8; line-height: 1.7; }
+
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 20px; margin-bottom: 18px; }
+.card-title { font-size: 13px; font-weight: 700; color: var(--cyan); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; text-transform: uppercase; letter-spacing: 1px; }
+
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+
+.bit-box {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 7px; font-family: 'JetBrains Mono', monospace;
+  font-weight: 700; font-size: 16px; border: 1px solid var(--border);
+  background: var(--panel); transition: all 0.2s;
+}
+.bit-box.one { background: #0d2a1a; border-color: var(--green); color: var(--green); }
+.bit-box.zero { background: var(--panel); color: var(--muted); }
+.bit-box.msb { border-color: var(--gold); color: var(--gold); background: #1a1200; }
+.bit-box.highlight { border-color: var(--cyan); color: var(--cyan); background: #001a2a; }
+
+.btn { padding: 8px 20px; border-radius: 9px; border: 1px solid; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; transition: all 0.15s; }
+.btn-cyan { border-color: var(--cyan); background: transparent; color: var(--cyan); }
+.btn-cyan:hover, .btn-cyan.active { background: var(--cyan); color: #000; }
+.btn-pink { border-color: var(--pink); background: transparent; color: var(--pink); }
+.btn-pink:hover, .btn-pink.active { background: var(--pink); color: #fff; }
+.btn-gold { border-color: var(--gold); background: transparent; color: var(--gold); }
+.btn-gold:hover, .btn-gold.active { background: var(--gold); color: #000; }
+.btn-green { border-color: var(--green); background: transparent; color: var(--green); }
+.btn-green:hover, .btn-green.active { background: var(--green); color: #000; }
+.btn-purple { border-color: var(--purple); background: transparent; color: var(--purple); }
+.btn-purple:hover, .btn-purple.active { background: var(--purple); color: #fff; }
+
+input[type=range] { cursor: pointer; }
+input[type=number], select {
+  background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+  color: var(--text); padding: 7px 12px; font-family: 'JetBrains Mono', monospace; font-size: 13px;
+}
+
+.truth-table { width: 100%; border-collapse: collapse; font-family: 'JetBrains Mono', monospace; font-size: 13px; }
+.truth-table th { color: var(--cyan); padding: 8px 14px; border-bottom: 1px solid var(--border); text-align: center; font-size: 12px; }
+.truth-table td { padding: 6px 14px; text-align: center; color: #94a3b8; }
+.truth-table tr:nth-child(even) td { background: #0a1525; }
+.truth-table tr.hl td { background: #0d2a1a; color: var(--green); font-weight: 700; }
+
+.formula-box { background: #060e1a; border: 1px solid #1e3a5f; border-radius: 10px; padding: 14px 18px; font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--text); margin: 10px 0; }
+
+.tag { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+.tag-green { background: #0d2a1a; color: var(--green); border: 1px solid #10d9a044; }
+.tag-pink { background: #2a0014; color: var(--pink); border: 1px solid #ff3d7f44; }
+.tag-cyan { background: #001a2a; color: var(--cyan); border: 1px solid #00e5ff44; }
+.tag-gold { background: #1a1200; color: var(--gold); border: 1px solid #fbbf2444; }
+
+.step-btn { padding: 6px 14px; border-radius: 7px; border: 1px solid var(--border); background: var(--card); color: var(--muted); cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 12px; transition: all 0.15s; }
+.step-btn:hover { border-color: var(--cyan); color: var(--cyan); }
+.step-btn.active { background: #001a2a; border-color: var(--cyan); color: var(--cyan); }
+
+/* CIRCUIT SVG STYLES */
+.gate-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; fill: #64748b; }
+.gate-value { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; }
+.wire-active { stroke: var(--green); stroke-width: 2.5; }
+.wire-inactive { stroke: #1e3a5f; stroke-width: 1.5; }
+
+/* PREV / NEXT */
+.nav-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--border); }
+.nav-footer button { padding: 10px 24px; border-radius: 10px; border: 1px solid var(--border); background: var(--card); color: var(--muted); cursor: pointer; font-family: 'Sora', sans-serif; font-weight: 600; transition: all 0.15s; }
+.nav-footer button:hover:not(:disabled) { border-color: var(--cyan); color: var(--cyan); }
+.nav-footer button:disabled { opacity: 0.3; cursor: default; }
+.nav-footer .counter { color: var(--muted); font-size: 13px; font-family: 'JetBrains Mono', monospace; }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div id="sidebar">
+  <div id="sidebar-header">
+    <div class="logo">⚙ COA Exam Tutor</div>
+    <div class="sub">Full Syllabus · Interactive · Visual</div>
+  </div>
+  <div id="nav">
+    <div class="nav-group">Unit 1 · Basics</div>
+    <button class="nav-item active" onclick="show(0)" id="nav0"><span class="icon">🖥</span><span class="label">Computer Organization</span><span class="num">01</span></button>
+    <button class="nav-item" onclick="show(1)" id="nav1"><span class="icon">🔢</span><span class="label">Number Representation</span><span class="num">02</span></button>
+    <button class="nav-item" onclick="show(2)" id="nav2"><span class="icon">±</span><span class="label">1's & 2's Complement</span><span class="num">03</span></button>
+    <button class="nav-item" onclick="show(3)" id="nav3"><span class="icon">📐</span><span class="label">IEEE-754 Float</span><span class="num">04</span></button>
+    <div class="nav-group">Unit 2 · Combinational</div>
+    <button class="nav-item" onclick="show(4)" id="nav4"><span class="icon">➕</span><span class="label">Half & Full Adder</span><span class="num">05</span></button>
+    <button class="nav-item" onclick="show(5)" id="nav5"><span class="icon">🔗</span><span class="label">Binary Adder/Subtractor</span><span class="num">06</span></button>
+    <button class="nav-item" onclick="show(6)" id="nav6"><span class="icon">⚡</span><span class="label">Carry Look-Ahead (CLA)</span><span class="num">07</span></button>
+    <button class="nav-item" onclick="show(7)" id="nav7"><span class="icon">🔀</span><span class="label">MUX & DEMUX</span><span class="num">08</span></button>
+    <div class="nav-group">Unit 3 · CPU & Registers</div>
+    <button class="nav-item" onclick="show(8)" id="nav8"><span class="icon">🚌</span><span class="label">Register & Bus Transfer</span><span class="num">09</span></button>
+    <button class="nav-item" onclick="show(9)" id="nav9"><span class="icon">✖</span><span class="label">Booth's Algorithm</span><span class="num">10</span></button>
+    <button class="nav-item" onclick="show(10)" id="nav10"><span class="icon">🏗</span><span class="label">Processor Organization</span><span class="num">11</span></button>
+    <button class="nav-item" onclick="show(11)" id="nav11"><span class="icon">📚</span><span class="label">Stack Organization</span><span class="num">12</span></button>
+    <div class="nav-group">Unit 4 · Instructions</div>
+    <button class="nav-item" onclick="show(12)" id="nav12"><span class="icon">📋</span><span class="label">Instruction Formats</span><span class="num">13</span></button>
+    <button class="nav-item" onclick="show(13)" id="nav13"><span class="icon">📍</span><span class="label">Addressing Modes</span><span class="num">14</span></button>
+    <button class="nav-item" onclick="show(14)" id="nav14"><span class="icon">⚙</span><span class="label">Micro-operations</span><span class="num">15</span></button>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="main">
+
+<!-- ═══════════════════════════════════════ PAGE 0: Computer Organization -->
+<div class="topic-page active" id="page0">
+  <div class="topic-header">
+    <div class="topic-tag">Unit 1 · Introduction</div>
+    <div class="topic-title" style="background:linear-gradient(90deg,var(--cyan),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Basic Computer Organization</div>
+    <div class="topic-desc">A computer system is built from functional units connected by buses. Understanding how data flows between these units is the foundation of COA.</div>
+  </div>
+
+  <!-- Block Diagram -->
+  <div class="card">
+    <div class="card-title">🏗 Complete Block Diagram</div>
+    <svg width="100%" viewBox="0 0 820 360" style="max-height:380px">
+      <!-- Background grid -->
+      <defs>
+        <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#0f1d30" stroke-width="0.5"/>
+        </pattern>
+        <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#00e5ff"/>
+        </marker>
+        <marker id="arrg" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#10d9a0"/>
+        </marker>
+        <marker id="arry" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#fbbf24"/>
+        </marker>
+      </defs>
+      <rect width="820" height="360" fill="url(#grid)"/>
+
+      <!-- INPUT UNIT -->
+      <rect x="20" y="140" width="110" height="80" rx="10" fill="#0b1626" stroke="#3b82f6" stroke-width="1.5"/>
+      <text x="75" y="175" text-anchor="middle" fill="#3b82f6" font-family="'JetBrains Mono'" font-size="12" font-weight="700">INPUT</text>
+      <text x="75" y="192" text-anchor="middle" fill="#3b82f6" font-family="'JetBrains Mono'" font-size="12" font-weight="700">UNIT</text>
+      <text x="75" y="212" text-anchor="middle" fill="#475569" font-family="'Sora'" font-size="9">Keyboard, Mouse</text>
+
+      <!-- OUTPUT UNIT -->
+      <rect x="20" y="240" width="110" height="80" rx="10" fill="#0b1626" stroke="#3b82f6" stroke-width="1.5"/>
+      <text x="75" y="274" text-anchor="middle" fill="#3b82f6" font-family="'JetBrains Mono'" font-size="12" font-weight="700">OUTPUT</text>
+      <text x="75" y="291" text-anchor="middle" fill="#3b82f6" font-family="'JetBrains Mono'" font-size="12" font-weight="700">UNIT</text>
+      <text x="75" y="310" text-anchor="middle" fill="#475569" font-family="'Sora'" font-size="9">Monitor, Printer</text>
+
+      <!-- MEMORY UNIT -->
+      <rect x="340" y="240" width="140" height="90" rx="10" fill="#0b1626" stroke="#a855f7" stroke-width="1.5"/>
+      <text x="410" y="275" text-anchor="middle" fill="#a855f7" font-family="'JetBrains Mono'" font-size="12" font-weight="700">MEMORY</text>
+      <text x="410" y="292" text-anchor="middle" fill="#a855f7" font-family="'JetBrains Mono'" font-size="12" font-weight="700">UNIT</text>
+      <text x="410" y="316" text-anchor="middle" fill="#475569" font-family="'Sora'" font-size="9">RAM / ROM / Cache</text>
+
+      <!-- CPU BOX -->
+      <rect x="230" y="20" width="360" height="200" rx="14" fill="#060c18" stroke="#00e5ff" stroke-width="2"/>
+      <text x="410" y="42" text-anchor="middle" fill="#00e5ff" font-family="'JetBrains Mono'" font-size="11" font-weight="700" letter-spacing="3">CENTRAL PROCESSING UNIT (CPU)</text>
+
+      <!-- ALU -->
+      <rect x="250" y="60" width="140" height="130" rx="10" fill="#0b1626" stroke="#10d9a0" stroke-width="1.5"/>
+      <text x="320" y="90" text-anchor="middle" fill="#10d9a0" font-family="'JetBrains Mono'" font-size="12" font-weight="700">ALU</text>
+      <text x="320" y="108" text-anchor="middle" fill="#475569" font-family="'Sora'" font-size="9">Arithmetic Logic</text>
+      <text x="320" y="120" text-anchor="middle" fill="#475569" font-family="'Sora'" font-size="9">Unit</text>
+      <text x="320" y="138" text-anchor="middle" fill="#10d9a044" font-family="'JetBrains Mono'" font-size="10">+ − × ÷</text>
+      <text x="320" y="153" text-anchor="middle" fill="#10d9a044" font-family="'JetBrains Mono'" font-size="10">AND OR XOR</text>
+      <text x="320" y="168" text-anchor="middle" fill="#10d9a044" font-family="'JetBrains Mono'" font-size="10">SHL SHR</text>
+
+      <!-- REGISTERS in CPU -->
+      <rect x="410" y="58" width="70" height="36" rx="7" fill="#0a1a2e" stroke="#fbbf24" stroke-width="1.2"/>
+      <text x="445" y="74" text-anchor="middle" fill="#fbbf24" font-family="'JetBrains Mono'" font-size="10" font-weight="600">ACC</text>
+      <text x="445" y="88" text-anchor="middle" fill="#fbbf24" font-family="'JetBrains Mono'" font-size="9">Accum.</text>
+
+      <rect x="490" y="58" width="80" height="36" rx="7" fill="#0a1a2e" stroke="#fbbf24" stroke-width="1.2"/>
+      <text x="530" y="74" text-anchor="middle" fill="#fbbf24" font-family="'JetBrains Mono'" font-size="10" font-weight="600">R1–R8</text>
+      <text x="530" y="88" text-anchor="middle" fill="#fbbf24" font-family="'JetBrains Mono'" font-size="9">Registers</text>
+
+      <rect x="410" y="106" width="70" height="36" rx="7" fill="#0a1a2e" stroke="#f97316" stroke-width="1.2"/>
+      <text x="445" y="122" text-anchor="middle" fill="#f97316" font-family="'JetBrains Mono'" font-size="10" font-weight="600">PC</text>
+      <text x="445" y="136" text-anchor="middle" fill="#f97316" font-family="'JetBrains Mono'" font-size="9">Prog. Ctr.</text>
+
+      <rect x="490" y="106" width="80" height="36" rx="7" fill="#0a1a2e" stroke="#f97316" stroke-width="1.2"/>
+      <text x="530" y="122" text-anchor="middle" fill="#f97316" font-family="'JetBrains Mono'" font-size="10" font-weight="600">IR / MAR</text>
+      <text x="530" y="136" text-anchor="middle" fill="#f97316" font-family="'JetBrains Mono'" font-size="9">Registers</text>
+
+      <!-- CU -->
+      <rect x="410" y="154" width="160" height="50" rx="8" fill="#0a1a2e" stroke="#ff3d7f" stroke-width="1.5"/>
+      <text x="490" y="175" text-anchor="middle" fill="#ff3d7f" font-family="'JetBrains Mono'" font-size="11" font-weight="700">CONTROL UNIT</text>
+      <text x="490" y="191" text-anchor="middle" fill="#475569" font-family="'Sora'" font-size="9">Sequencer · Decoder · Timing</text>
+
+      <!-- BUSES (horizontal) -->
+      <!-- Data Bus -->
+      <line x1="130" y1="180" x2="230" y2="180" stroke="#00e5ff" stroke-width="2" marker-end="url(#arr)"/>
+      <line x1="590" y1="180" x2="340" y2="180" stroke="#00e5ff" stroke-width="2" marker-end="url(#arr)"/>
+      <!-- Memory bus vertical -->
+      <line x1="410" y1="220" x2="410" y2="240" stroke="#a855f7" stroke-width="2" marker-end="url(#arr)"/>
+      <!-- Output from Input -->
+      <line x1="75" y1="220" x2="75" y2="240" stroke="#3b82f6" stroke-width="2" marker-end="url(#arr)"/>
+
+      <!-- SYSTEM BUS label -->
+      <rect x="230" y="170" width="360" height="18" rx="4" fill="#00e5ff15" stroke="#00e5ff44"/>
+      <text x="410" y="183" text-anchor="middle" fill="#00e5ff" font-family="'JetBrains Mono'" font-size="10" font-weight="600">DATA BUS</text>
+
+      <!-- Secondary buses -->
+      <line x1="330" y1="280" x2="230" y2="130" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="5,3"/>
+      <!-- Address bus label -->
+      <text x="660" y="150" fill="#a855f7" font-family="'JetBrains Mono'" font-size="10">ADDRESS BUS</text>
+      <line x1="580" y1="285" x2="580" y2="160" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+      <line x1="580" y1="285" x2="480" y2="285" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+      <!-- I/O arrows -->
+      <text x="20" y="130" fill="#475569" font-family="'Sora'" font-size="9">USER</text>
+      <line x1="40" y1="135" x2="40" y2="140" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+
+      <!-- Legend -->
+      <rect x="650" y="240" width="160" height="80" rx="8" fill="#0b1626" stroke="#1a3050"/>
+      <text x="660" y="258" fill="#64748b" font-family="'Sora'" font-size="10" font-weight="600">LEGEND</text>
+      <line x1="660" y1="270" x2="690" y2="270" stroke="#00e5ff" stroke-width="2"/>
+      <text x="696" y="274" fill="#94a3b8" font-family="'Sora'" font-size="9">Data Bus</text>
+      <line x1="660" y1="286" x2="690" y2="286" stroke="#a855f7" stroke-width="2" stroke-dasharray="4,2"/>
+      <text x="696" y="290" fill="#94a3b8" font-family="'Sora'" font-size="9">Address Bus</text>
+      <line x1="660" y1="302" x2="690" y2="302" stroke="#fbbf24" stroke-width="2" stroke-dasharray="3,2"/>
+      <text x="696" y="306" fill="#94a3b8" font-family="'Sora'" font-size="9">Control Bus</text>
+    </svg>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">🧠 Functional Units</div>
+      <div style="display:flex;flex-direction:column;gap:10px;font-size:13px">
+        <div style="background:#001a2a;border:1px solid #00e5ff44;border-radius:9px;padding:12px">
+          <div style="color:var(--cyan);font-weight:700;margin-bottom:4px">ALU — Arithmetic Logic Unit</div>
+          <div style="color:#94a3b8;font-size:12px">Performs all calculations (+, −, ×, ÷) and logical operations (AND, OR, XOR, NOT, shifts). Gets operands from registers.</div>
+        </div>
+        <div style="background:#2a0014;border:1px solid #ff3d7f44;border-radius:9px;padding:12px">
+          <div style="color:var(--pink);font-weight:700;margin-bottom:4px">CU — Control Unit</div>
+          <div style="color:#94a3b8;font-size:12px">Fetches instructions, decodes them, and sends control signals to all other units. The "director" of the CPU.</div>
+        </div>
+        <div style="background:#1a1200;border:1px solid #fbbf2444;border-radius:9px;padding:12px">
+          <div style="color:var(--gold);font-weight:700;margin-bottom:4px">Registers</div>
+          <div style="color:#94a3b8;font-size:12px">Ultra-fast storage inside CPU. PC (program counter), IR (instruction register), MAR, MDR, ACC, R0–R7.</div>
+        </div>
+        <div style="background:#150a2a;border:1px solid #a855f744;border-radius:9px;padding:12px">
+          <div style="color:var(--purple);font-weight:700;margin-bottom:4px">Memory</div>
+          <div style="color:#94a3b8;font-size:12px">Stores programs and data. CPU sends address via MAR, data comes back via MDR.</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">🔄 Instruction Cycle</div>
+      <svg width="100%" viewBox="0 0 280 260">
+        <defs>
+          <marker id="ca" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+            <polygon points="0 0, 7 2.5, 0 5" fill="#00e5ff"/>
+          </marker>
+        </defs>
+        <!-- Circles for cycle phases -->
+        <circle cx="140" cy="40" r="32" fill="#001a2a" stroke="#00e5ff" stroke-width="1.5"/>
+        <text x="140" y="35" text-anchor="middle" fill="#00e5ff" font-family="'JetBrains Mono'" font-size="10" font-weight="700">FETCH</text>
+        <text x="140" y="50" text-anchor="middle" fill="#64748b" font-family="'Sora'" font-size="8">PC→MAR→IR</text>
+
+        <circle cx="230" cy="130" r="32" fill="#001a2a" stroke="#10d9a0" stroke-width="1.5"/>
+        <text x="230" y="125" text-anchor="middle" fill="#10d9a0" font-family="'JetBrains Mono'" font-size="10" font-weight="700">DECODE</text>
+        <text x="230" y="140" text-anchor="middle" fill="#64748b" font-family="'Sora'" font-size="8">IR decoded</text>
+
+        <circle cx="180" cy="225" r="32" fill="#001a2a" stroke="#fbbf24" stroke-width="1.5"/>
+        <text x="180" y="220" text-anchor="middle" fill="#fbbf24" font-family="'JetBrains Mono'" font-size="10" font-weight="700">EXECUTE</text>
+        <text x="180" y="235" text-anchor="middle" fill="#64748b" font-family="'Sora'" font-size="8">ALU / CU acts</text>
+
+        <circle cx="60" cy="225" r="32" fill="#001a2a" stroke="#f97316" stroke-width="1.5"/>
+        <text x="60" y="220" text-anchor="middle" fill="#f97316" font-family="'JetBrains Mono'" font-size="9" font-weight="700">WRITE</text>
+        <text x="60" y="235" text-anchor="middle" fill="#64748b" font-family="'Sora'" font-size="8">BACK</text>
+
+        <circle cx="30" cy="130" r="32" fill="#001a2a" stroke="#a855f7" stroke-width="1.5"/>
+        <text x="30" y="125" text-anchor="middle" fill="#a855f7" font-family="'JetBrains Mono'" font-size="9" font-weight="700">MEMORY</text>
+        <text x="30" y="140" text-anchor="middle" fill="#64748b" font-family="'Sora'" font-size="8">ACCESS</text>
+
+        <!-- Arrows around circle -->
+        <path d="M 168 64 Q 210 80 210 100" stroke="#00e5ff" stroke-width="1.5" fill="none" marker-end="url(#ca)"/>
+        <path d="M 218 160 Q 220 195 205 205" stroke="#10d9a0" stroke-width="1.5" fill="none" marker-end="url(#ca)"/>
+        <path d="M 148 225 Q 120 240 95 235" stroke="#fbbf24" stroke-width="1.5" fill="none" marker-end="url(#ca)"/>
+        <path d="M 35 195 Q 20 170 20 155" stroke="#f97316" stroke-width="1.5" fill="none" marker-end="url(#ca)"/>
+        <path d="M 50 100 Q 80 65 110 52" stroke="#a855f7" stroke-width="1.5" fill="none" marker-end="url(#ca)"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Three Buses -->
+  <div class="card">
+    <div class="card-title">🚌 The Three System Buses</div>
+    <div class="grid3">
+      <div style="background:#001a2a;border:1px solid var(--cyan);border-radius:10px;padding:14px">
+        <div style="color:var(--cyan);font-weight:700;font-size:14px;margin-bottom:8px">DATA BUS</div>
+        <div style="color:var(--muted);font-size:12px;margin-bottom:8px">Carries actual data between CPU, memory, and I/O</div>
+        <div class="tag tag-cyan">Bidirectional</div><br><br>
+        <div class="mono" style="font-size:11px;color:#475569">Width = word size<br>8, 16, 32, 64 bits</div>
+      </div>
+      <div style="background:#150a2a;border:1px solid var(--purple);border-radius:10px;padding:14px">
+        <div style="color:var(--purple);font-weight:700;font-size:14px;margin-bottom:8px">ADDRESS BUS</div>
+        <div style="color:var(--muted);font-size:12px;margin-bottom:8px">Carries memory/I/O addresses from CPU</div>
+        <div class="tag tag-cyan" style="background:#150a2a;color:var(--purple);border-color:#a855f744">Unidirectional</div><br><br>
+        <div class="mono" style="font-size:11px;color:#475569">n bits → 2ⁿ addresses<br>32-bit → 4GB RAM</div>
+      </div>
+      <div style="background:#2a1000;border:1px solid var(--gold);border-radius:10px;padding:14px">
+        <div style="color:var(--gold);font-weight:700;font-size:14px;margin-bottom:8px">CONTROL BUS</div>
+        <div style="color:var(--muted);font-size:12px;margin-bottom:8px">Carries control/timing signals from CU</div>
+        <div class="tag tag-gold">Bidirectional</div><br><br>
+        <div class="mono" style="font-size:11px;color:#475569">READ, WRITE<br>IRQ, RESET, CLK</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-footer">
+    <button disabled>← Previous</button>
+    <span class="counter">1 / 15</span>
+    <button onclick="show(1)">Number Representation →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ PAGE 1: Number Representation -->
+<div class="topic-page" id="page1">
+  <div class="topic-header">
+    <div class="topic-tag">Unit 1 · Number Systems</div>
+    <div class="topic-title" style="background:linear-gradient(90deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Number Representation</div>
+    <div class="topic-desc">Computers store numbers in binary. Understanding signed/unsigned representation, fixed-point, and integer formats is crucial for all arithmetic operations.</div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">🔢 Unsigned Integer</div>
+      <div style="font-size:13px;color:#94a3b8;margin-bottom:14px">All bits represent magnitude. No sign bit.</div>
+      <div id="unsignedDemo" style="margin-bottom:14px">
+        <div style="display:flex;gap:4px;margin-bottom:10px" id="unsignedBits"></div>
+        <div style="color:var(--gold);font-family:'JetBrains Mono';font-size:18px" id="unsignedValue">= 0</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <span style="color:var(--muted);font-size:12px">Value:</span>
+        <input type="range" min="0" max="255" value="0" id="unsignedSlider" style="flex:1;accent-color:var(--gold)" oninput="updateUnsigned(this.value)">
+        <span class="mono" style="color:var(--gold);min-width:35px" id="unsignedNum">0</span>
+      </div>
+      <div class="formula-box" style="margin-top:12px">Range: 0 to 2ⁿ − 1<br>8-bit: 0 to <span style="color:var(--gold)">255</span></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">± Signed Magnitude</div>
+      <div style="font-size:13px;color:#94a3b8;margin-bottom:14px">MSB = sign bit (0=+, 1=−). Remaining bits = magnitude.</div>
+      <div style="margin-bottom:12px">
+        <div style="display:flex;gap:4px;align-items:center;margin-bottom:8px">
+          <div class="bit-box msb" id="smSign">0</div>
+          <div style="color:var(--muted);font-size:10px;margin:0 4px">|</div>
+          <div id="smMagBits" style="display:flex;gap:4px"></div>
+        </div>
+        <div style="color:var(--orange);font-family:'JetBrains Mono';font-size:16px" id="smValue">= 0</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <input type="range" min="-127" max="127" value="0" id="smSlider" style="flex:1;accent-color:var(--orange)" oninput="updateSM(this.value)">
+        <span class="mono" style="color:var(--orange);min-width:40px" id="smNum">0</span>
+      </div>
+      <div class="formula-box" style="margin-top:12px">Range: −(2ⁿ⁻¹−1) to +(2ⁿ⁻¹−1)<br>8-bit: <span style="color:var(--orange)">−127 to +127</span> (two zeros!)</div>
+    </div>
+  </div>
+
+  <!-- Integer Formats -->
+  <div class="card">
+    <div class="card-title">📊 All Integer Representations — 8-bit Comparison</div>
+    <div style="overflow-x:auto">
+      <table class="truth-table" style="min-width:600px">
+        <tr>
+          <th>Decimal</th>
+          <th>Binary (Unsigned)</th>
+          <th>Signed Magnitude</th>
+          <th>1's Complement</th>
+          <th>2's Complement</th>
+        </tr>
+        <tr><td>+7</td><td style="color:var(--green)">0000 0111</td><td style="color:var(--cyan)">0000 0111</td><td style="color:var(--gold)">0000 0111</td><td style="color:var(--pink)">0000 0111</td></tr>
+        <tr><td>+1</td><td style="color:var(--green)">0000 0001</td><td style="color:var(--cyan)">0000 0001</td><td style="color:var(--gold)">0000 0001</td><td style="color:var(--pink)">0000 0001</td></tr>
+        <tr><td>0</td><td style="color:var(--green)">0000 0000</td><td style="color:var(--cyan)">0000 0000 (+0)</td><td style="color:var(--gold)">0000 0000 (+0)</td><td style="color:var(--pink)">0000 0000</td></tr>
+        <tr><td>−0</td><td style="color:#475569">N/A</td><td style="color:var(--cyan)">1000 0000 (−0)</td><td style="color:var(--gold)">1111 1111 (−0)</td><td style="color:var(--pink)">N/A (unique!)</td></tr>
+        <tr><td>−1</td><td style="color:#475569">N/A</td><td style="color:var(--cyan)">1000 0001</td><td style="color:var(--gold)">1111 1110</td><td style="color:var(--pink)">1111 1111</td></tr>
+        <tr><td>−7</td><td style="color:#475569">N/A</td><td style="color:var(--cyan)">1000 0111</td><td style="color:var(--gold)">1111 1000</td><td style="color:var(--pink)">1111 1001</td></tr>
+        <tr><td>−8</td><td style="color:#475569">N/A</td><td style="color:#475569">N/A</td><td style="color:#475569">N/A</td><td style="color:var(--pink)">1111 1000</td></tr>
+        <tr><td>−128</td><td style="color:#475569">N/A</td><td style="color:#475569">N/A</td><td style="color:#475569">N/A</td><td style="color:var(--pink)">1000 0000</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">📌 Fixed-Point Representation</div>
+      <div style="font-size:13px;color:#94a3b8;margin-bottom:14px">Decimal point is fixed at a predetermined position. Used in DSPs, financial systems.</div>
+      <svg width="100%" viewBox="0 0 400 120">
+        <!-- Integer part -->
+        <rect x="10" y="30" width="180" height="50" rx="8" fill="#0b1626" stroke="#00e5ff" stroke-width="1.5"/>
+        <text x="100" y="52" text-anchor="middle" fill="#00e5ff" font-family="'JetBrains Mono'" font-size="11" font-weight="700">INTEGER PART</text>
+        <text x="100" y="68" text-anchor="middle" fill="#475569" font-family="'Sora'" font-size="9">1 0 1 1 . (=11)</text>
+
+        <!-- decimal point -->
+        <circle cx="200" cy="58" r="6" fill="#fbbf24"/>
+        <text x="200" y="62" text-anchor="middle" fill="#000" font-family="'JetBrains Mono'" font-size="10" font-weight="900">.</text>
+
+        <!-- Fractional part -->
+        <rect x="210" y="30" width="180" height="50" rx="8" fill="#0b1626" stroke="#10d9a0" stroke-width="1.5"/>
+        <text x="300" y="52" text-anchor="middle" fill="#10d9a0" font-family="'JetBrains Mono'" font-size="11" font-weight="700">FRAC PART</text>
+        <text x="300" y="68" text-anchor="middle" fill="#475569" font-family="'Sora'" font-size="9">0 1 0 0 (=0.25)</text>
+
+        <text x="200" y="105" text-anchor="middle" fill="#fbbf24" font-family="'JetBrains Mono'" font-size="12">1011.0100 = 11.25</text>
+        <text x="100" y="22" text-anchor="middle" fill="#64748b" font-family="'Sora'" font-size="9">2³ 2² 2¹ 2⁰</text>
+        <text x="300" y="22" text-anchor="middle" fill="#64748b" font-family="'Sora'" font-size="9">2⁻¹ 2⁻² 2⁻³ 2⁻⁴</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <div class="card-title">⚖ Representation Comparison</div>
+      <div style="font-size:13px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:#0a1525;border-radius:8px">
+          <div>
+            <div style="color:var(--cyan);font-weight:700">2's Complement</div>
+            <div style="color:var(--muted);font-size:11px">Most used in computers</div>
+          </div>
+          <div class="tag tag-green">Best ✓</div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:#0a1525;border-radius:8px">
+          <div>
+            <div style="color:var(--gold);font-weight:700">1's Complement</div>
+            <div style="color:var(--muted);font-size:11px">Two zero representations</div>
+          </div>
+          <div class="tag tag-gold">OK</div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:#0a1525;border-radius:8px">
+          <div>
+            <div style="color:var(--orange);font-weight:700">Signed Magnitude</div>
+            <div style="color:var(--muted);font-size:11px">Difficult for arithmetic</div>
+          </div>
+          <div class="tag tag-pink">Complex</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-footer">
+    <button onclick="show(0)">← Computer Organization</button>
+    <span class="counter">2 / 15</span>
+    <button onclick="show(2)">1's & 2's Complement →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ PAGE 2: 1's and 2's Complement -->
+<div class="topic-page" id="page2">
+  <div class="topic-header">
+    <div class="topic-tag">Unit 1 · Arithmetic</div>
+    <div class="topic-title" style="background:linear-gradient(90deg,var(--cyan),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent">1's & 2's Complement + Overflow</div>
+    <div class="topic-desc">2's complement is the universal standard for signed integers. It allows subtraction to be performed using addition, simplifying hardware design.</div>
+  </div>
+
+  <!-- Interactive complement -->
+  <div class="card">
+    <div class="card-title">🔄 Interactive Complement Calculator</div>
+    <div style="display:flex;gap:12px;align-items:center;margin-bottom:18px;flex-wrap:wrap">
+      <input type="range" min="-128" max="127" value="13" id="compSlider" oninput="updateComplement()" style="flex:1;accent-color:var(--cyan)">
+      <span class="mono" style="color:var(--cyan);min-width:40px;font-size:18px" id="compNum">13</span>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:14px" id="compRows"></div>
+  </div>
+
+  <!-- Addition with 2's complement -->
+  <div class="card">
+    <div class="card-title">➕ Addition & Subtraction via 2's Complement</div>
+    <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;align-items:center">
+      <div style="display:flex;gap:8px;align-items:center">
+        <span style="color:var(--gold)">A:</span>
+        <input type="number" min="-128" max="127" value="45" id="addA" style="width:70px" oninput="updateAddSub()">
+      </div>
+      <div id="opBtns" style="display:flex;gap:6px">
+        <button class="btn btn-cyan active" onclick="setOp('+')" id="opAdd">+ ADD</button>
+        <button class="btn btn-pink" onclick="setOp('-')" id="opSub">− SUB</button>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <span style="color:var(--green)">B:</span>
+        <input type="number" min="-128" max="127" value="30" id="addB" style="width:70px" oninput="updateAddSub()">
+      </div>
+    </div>
+    <div id="addSubDisplay"></div>
+  </div>
+
+  <!-- Overflow Detection -->
+  <div class="card">
+    <div class="card-title" style="color:var(--pink)">⚠️ Overflow Detection (EXAM IMPORTANT)</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div>
+        <div style="font-size:13px;color:#94a3b8;margin-bottom:12px">Overflow occurs when the result cannot be represented in n bits.</div>
+        <div class="formula-box">
+          <span style="color:var(--cyan)">Rule 1:</span> V = Carry<sub>in</sub> ⊕ Carry<sub>out</sub><br><br>
+          <span style="color:var(--gold)">Rule 2:</span> Two positives → negative result<br>
+          Two negatives → positive result
+        </div>
+        <div style="margin-top:12px;font-size:13px;color:#94a3b8">
+          <div style="margin-bottom:8px">• <strong style="color:var(--green)">No Overflow:</strong> Cin = Cout of MSB</div>
+          <div>• <strong style="color:var(--pink)">Overflow:</strong> Cin ≠ Cout of MSB</div>
+        </div>
+      </div>
+      <div>
+        <div id="overflowExamples" style="display:flex;flex-direction:column;gap:10px"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-footer">
+    <button onclick="show(1)">← Number Representation</button>
+    <span class="counter">3 / 15</span>
+    <button onclick="show(3)">IEEE-754 Float →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ PAGE 3: IEEE 754 -->
+<div class="topic-page" id="page3">
+  <div class="topic-header">
+    <div class="topic-tag">Unit 1 · Floating Point</div>
+    <div class="topic-title" style="background:linear-gradient(90deg,var(--pink),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent">IEEE-754 Floating Point</div>
+    <div class="topic-desc">IEEE 754 is the international standard for floating-point arithmetic. It defines 32-bit (single) and 64-bit (double) precision formats used in ALL modern processors.</div>
+  </div>
+
+  <!-- Format Diagram -->
+  <div class="card">
+    <div class="card-title">📐 32-bit Single Precision Format</div>
+    <svg width="100%" viewBox="0 0 760 110">
+      <!-- Sign -->
+      <rect x="10" y="20" width="50" height="50" rx="8" fill="#2a0014" stroke="#ff3d7f" stroke-width="2"/>
+      <text x="35" y="42" text-anchor="middle" fill="#ff3d7f" font-family="'JetBrains Mono'" font-size="13" font-weight="700">S</text>
+      <text x="35" y="58" text-anchor="middle" fill="#ff3d7f" font-family="'JetBrains Mono'" font-size="10">1 bit</text>
+      <text x="35" y="86" text-anchor="middle" fill="#64748b" font-family="'Sora'" font-size="8">Bit 31</text>
+
+      <!-- Exponent -->
+      <rect x="70" y="20" width="270" height="50" rx="8" fill="#1a1200" stroke="#fbbf24" stroke-width="2"/>
+      <text x="205" y="42" text-anchor="middle" fill="#fbbf24" font-family="'JetBrains Mono'" font-size="13" font-weight="700">EXPONENT (E)</text>
+      <text x="205" y="58" text-anchor="middle" fill="#fbbf24" font-family="'JetBrains Mono'" font-size="10">8 bits — Biased by 127</text>
+      <text x="70" y="86" fill="#64748b" font-family="'Sora'" font-size="8">Bit 30</text>
+      <text x="305" y="86" text-anchor="end" fill="#64748b" font-family="'Sora'" font-size="8">Bit 23</text>
+
+      <!-- Mantissa -->
+      <rect x="350" y="20" width="400" height="50" rx="8" fill="#001a2a" stroke="#00e5ff" stroke-width="2"/>
+      <text x="550" y="42" text-anchor="middle" fill="#00e5ff" font-family="'JetBrains Mono'" font-size="13" font-weight="700">MANTISSA (M) — Fraction</text>
+      <text x="550" y="58" text-anchor="middle" fill="#00e5ff" font-family="'JetBrains Mono'" font-size="10">23 bits — Implicit leading 1</text>
+      <text x="350" y="86" fill="#64748b" font-family="'Sora'" font-size="8">Bit 22</text>
+      <text x="748" y="86" text-anchor="end" fill="#64748b" font-family="'Sora'" font-size="8">Bit 0</text>
+
+      <!-- Formula -->
+      <text x="380" y="108" fill="#94a3b8" font-family="'JetBrains Mono'" font-size="11">Value = (−1)ˢ × 2^(E−127) × 1.M</text>
+    </svg>
+  </div>
+
+  <!-- Interactive IEEE converter -->
+  <div class="card">
+    <div class="card-title">🔢 Live IEEE-754 Converter</div>
+    <div style="display:flex;gap:12px;margin-bottom:20px;align-items:center;flex-wrap:wrap">
+      <input type="number" step="any" value="13.375" id="ieeeInput" style="width:140px;font-size:16px" oninput="updateIEEE()">
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-pink active" onclick="setIEEEBits(32)" id="btn32">32-bit</button>
+        <button class="btn btn-purple" onclick="setIEEEBits(64)" id="btn64">64-bit</button>
+      </div>
+    </div>
+    <div id="ieeeBitDisplay" style="display:flex;flex-wrap:wrap;gap:3px;margin-bottom:16px"></div>
+    <div class="grid3" id="ieeeDetails"></div>
+  </div>
+
+  <!-- Step by step conversion -->
+  <div class="card">
+    <div class="card-title">📝 Step-by-Step Conversion (13.375 Example)</div>
+    <div style="display:flex;flex-direction:column;gap:10px;font-size:13px">
+      <div style="background:#0a1525;border-radius:10px;padding:14px">
+        <div style="color:var(--cyan);font-weight:700;margin-bottom:6px">Step 1: Sign Bit</div>
+        <div style="color:#94a3b8">13.375 is <span style="color:var(--green)">positive</span> → S = <span style="color:var(--pink);font-family:'JetBrains Mono'">0</span></div>
+      </div>
+      <div style="background:#0a1525;border-radius:10px;padding:14px">
+        <div style="color:var(--gold);font-weight:700;margin-bottom:6px">Step 2: Convert to Binary</div>
+        <div class="mono" style="font-size:12px;color:#94a3b8">
+          13 = 1101₂<br>
+          0.375 × 2 = 0.75 → 0<br>
+          0.75 × 2 = 1.5 → 1<br>
+          0.5 × 2 = 1.0 → 1<br>
+          ∴ 0.375 = 0.011₂<br>
+          <span style="color:var(--gold)">→ 13.375 = 1101.011₂</span>
+        </div>
+      </div>
+      <div style="background:#0a1525;border-radius:10px;padding:14px">
+        <div style="color:var(--pink);font-weight:700;margin-bottom:6px">Step 3: Normalize</div>
+        <div class="mono" style="font-size:12px;color:#94a3b8">1101.011 = 1.<span style="color:var(--cyan)">101011</span> × 2³</div>
+      </div>
+      <div style="background:#0a1525;border-radius:10px;padding:14px">
+        <div style="color:var(--purple);font-weight:700;margin-bottom:6px">Step 4: Compute Exponent</div>
+        <div class="mono" style="font-size:12px;color:#94a3b8">E = 3 + 127 (bias) = <span style="color:var(--gold)">130 = 10000010₂</span></div>
+      </div>
+      <div style="background:#0a1525;border-radius:10px;padding:14px">
+        <div style="color:var(--green);font-weight:700;margin-bottom:6px">Step 5: Mantissa (drop leading 1)</div>
+        <div class="mono" style="font-size:12px;color:#94a3b8">M = <span style="color:var(--cyan)">10101100000000000000000</span> (23 bits)</div>
+      </div>
+      <div style="background:#001a2a;border:1px solid var(--cyan);border-radius:10px;padding:14px">
+        <div style="color:var(--cyan);font-weight:700;margin-bottom:6px">✅ Final IEEE-754 (32-bit):</div>
+        <div class="mono" style="font-size:12px">
+          <span style="color:var(--pink)">0</span> <span style="color:var(--gold)">10000010</span> <span style="color:var(--cyan)">10101100000000000000000</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Special Values -->
+  <div class="card">
+    <div class="card-title">⚡ Special IEEE-754 Values</div>
+    <table class="truth-table">
+      <tr><th>Sign</th><th>Exponent</th><th>Mantissa</th><th>Value</th><th>Meaning</th></tr>
+      <tr><td>0/1</td><td style="color:var(--gold)">00000000</td><td style="color:var(--cyan)">00...0</td><td style="color:var(--green)">±0</td><td>Zero</td></tr>
+      <tr><td>0/1</td><td style="color:var(--gold)">00000000</td><td style="color:var(--cyan)">≠ 0</td><td style="color:var(--purple)">±Denorm</td><td>Denormalized (very small)</td></tr>
+      <tr><td>0</td><td style="color:var(--gold)">11111111</td><td style="color:var(--cyan)">00...0</td><td style="color:var(--orange)">+∞</td><td>Positive Infinity</td></tr>
+      <tr><td>1</td><td style="color:var(--gold)">11111111</td><td style="color:var(--cyan)">00...0</td><td style="color:var(--orange)">−∞</td><td>Negative Infinity</td></tr>
+      <tr><td>X</td><td style="color:var(--gold)">11111111</td><td style="color:var(--cyan)">≠ 0</td><td style="color:var(--pink)">NaN</td><td>Not a Number (0÷0, √−1)</td></tr>
+    </table>
+  </div>
+
+  <div class="nav-footer">
+    <button onclick="show(2)">← 1's & 2's Complement</button>
+    <span class="counter">4 / 15</span>
+    <button onclick="show(4)">Half & Full Adder →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ PAGE 4: Half & Full Adder -->
+<div class="topic-page" id="page4">
+  <div class="topic-header">
+    <div class="topic-tag">Unit 2 · Combinational Circuits</div>
+    <div class="topic-title" style="background:linear-gradient(90deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Half Adder & Full Adder</div>
+    <div class="topic-desc">Adders are the most fundamental arithmetic circuits. Built from basic logic gates (XOR, AND), they form the basis of all ALU arithmetic operations.</div>
+  </div>
+
+  <!-- Half Adder -->
+  <div class="card">
+    <div class="card-title" style="color:var(--green)">① Half Adder — 2 inputs, no carry-in</div>
+    <div class="grid2">
+      <div>
+        <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap">
+          <button class="btn btn-green" onclick="toggleHA('A')" id="haA">A = 0</button>
+          <button class="btn btn-cyan" onclick="toggleHA('B')" id="haB">B = 0</button>
+        </div>
+        <!-- Half Adder Circuit SVG -->
+        <svg width="100%" viewBox="0 0 340 180" id="haSVG">
+          <!-- Input labels -->
+          <text x="10" y="68" fill="#10d9a0" font-family="'JetBrains Mono'" font-size="13" font-weight="700" id="haALabel">A=0</text>
+          <text x="10" y="118" fill="#00e5ff" font-family="'JetBrains Mono'" font-size="13" font-weight="700" id="haBLabel">B=0</text>
+
+          <!-- A wire to XOR and AND -->
+          <line x1="45" y1="65" x2="110" y2="65" id="haWireA1" class="wire-inactive"/>
+          <line x1="80" y1="65" x2="80" y2="90" id="haWireA2" class="wire-inactive"/>
+          <line x1="80" y1="90" x2="110" y2="90" id="haWireA3" class="wire-inactive"/>
+
+          <!-- B wire to XOR and AND -->
+          <line x1="45" y1="115" x2="110" y2="115" id="haWireB1" class="wire-inactive"/>
+          <line x1="90" y1="115" x2="90" y2="140" id="haWireB2" class="wire-inactive"/>
+          <line x1="90" y1="140" x2="110" y2="140" id="haWireB3" class="wire-inactive"/>
+
+          <!-- XOR Gate (top) -->
+          <path d="M 110 52 Q 120 65 110 78" fill="none" id="xorArc1" class="wire-inactive"/>
+          <path d="M 115 52 C 150 52 165 65 150 78 Q 140 72 115 78 Q 130 65 115 52Z" fill="#0b1626" id="xorBody" stroke="#10d9a0" stroke-width="1.5"/>
+          <path d="M 108 52 Q 118 65 108 78" fill="none" stroke="#10d9a0" stroke-width="1.5"/>
+          <text x="133" y="69" fill="#10d9a0" font-family="'JetBrains Mono'" font-size="9" font-weight="700">XOR</text>
+
+          <!-- AND Gate (bottom) -->
+          <path d="M 110 82 L 110 108 C 150 108 160 95 110 82Z" fill="#0b1626" stroke="#00e5ff" stroke-width="1.5" id="andBody"/>
+          <text x="120" y="99" fill="#00e5ff" font-family="'JetBrains Mono'" font-size="9" font-weight="700">AND</text>
+
+          <!-- Output wires -->
+          <line x1="162" y1="65" x2="230" y2="65" id="haWireSum" class="wire-inactive"/>
+          <line x1="162" y1="95" x2="230" y2="95" id="haWireCarry" class="wire-inactive"/>
+
+          <!-- Output labels -->
+          <text x="235" y="69" fill="#10d9a0" font-family="'JetBrains Mono'" font-size="12" id="haSum">SUM=0</text>
+          <text x="235" y="99" fill="#fbbf24" font-family="'JetBrains Mono'" font-size="12" id="haCarry">CARRY=0</text>
+
+          <!-- gate labels -->
+          <text x="115" y="40" fill="#475569" font-family="'Sora'" font-size="9">S = A ⊕ B</text>
+          <text x="115" y="118" fill="#475569" font-family="'Sora'" font-size="9">C = A · B</text>
+        </svg>
+
+        <div class="formula-box">
+          <span style="color:var(--green)">Sum</span>  = A ⊕ B  (XOR)<br>
+          <span style="color:var(--gold)">Carry</span> = A · B  (AND)
+        </div>
+      </div>
+      <div>
+        <table class="truth-table">
+          <tr><th>A</th><th>B</th><th style="color:var(--green)">Sum</th><th style="color:var(--gold)">Carry</th></tr>
+          <tr id="haRow00"><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr id="haRow01"><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+          <tr id="haRow10"><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+          <tr id="haRow11"><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+        </table>
+        <div style="margin-top:14px;padding:12px;background:#0a2a1a;border:1px solid #10d9a044;border-radius:9px;font-size:13px;color:#94a3b8">
+          <strong style="color:var(--green)">Limitation:</strong> Cannot handle carry-in, so can only be used for the <em>least significant bit</em> in a multi-bit adder.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Full Adder -->
+  <div class="card">
+    <div class="card-title" style="color:var(--cyan)">② Full Adder — 3 inputs (A, B, Cin)</div>
+    <div class="grid2">
+      <div>
+        <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+          <button class="btn btn-green" onclick="toggleFA('A')" id="faA">A = 0</button>
+          <button class="btn btn-cyan" onclick="toggleFA('B')" id="faB">B = 0</button>
+          <button class="btn btn-gold" onclick="toggleFA('C')" id="faCin">Cin = 0</button>
+        </div>
+        <!-- Full Adder Circuit -->
+        <svg width="100%" viewBox="0 0 380 220" id="faSVG">
+          <text x="5" y="58" fill="#10d9a0" font-family="'JetBrains Mono'" font-size="11" font-weight="700" id="faALabel">A=0</text>
+          <text x="5" y="108" fill="#00e5ff" font-family="'JetBrains Mono'" font-size="11" font-weight="700" id="faBLabel">B=0</text>
+          <text x="5" y="158" fill="#fbbf24" font-family="'JetBrains Mono'" font-size="11" font-weight="700" id="faCLabel">Cin=0</text>
+
+          <!-- First XOR (A,B) -->
+          <path d="M 95 38 C 130 38 145 55 130 72 Q 120 65 95 72 Q 110 55 95 38Z" fill="#0b1626" stroke="#10d9a0" stroke-width="1.5"/>
+          <path d="M 92 38 Q 102 55 92 72" fill="none" stroke="#10d9a0" stroke-width="1.5"/>
+          <text x="107" y="59" fill="#10d9a0" font-family="'JetBrains Mono'" font-size="8">XOR</text>
+
+          <!-- AND 1 (A,B) -->
+          <path d="M 95 86 L 95 112 C 135 112 145 99 95 86Z" fill="#0b1626" stroke="#ff3d7f" stroke-width="1.5"/>
+          <text x="105" y="103" fill="#ff3d7f" font-family="'JetBrains Mono'" font-size="8">AND</text>
+
+          <!-- Input wires A,B to first XOR and AND -->
+          <line x1="38" y1="55" x2="95" y2="55" id="faWA1" class="wire-inactive"/>
+          <line x1="65" y1="55" x2="65" y2="93" id="faWA2" class="wire-inactive"/>
+          <line x1="65" y1="93" x2="95" y2="93" id="faWA3" class="wire-inactive"/>
+          <line x1="38" y1="105" x2="95" y2="105" id="faWB1" class="wire-inactive"/>
+          <line x1="75" y1="105" x2="75" y2="63" id="faWB2" class="wire-inactive"/>
+          <line x1="75" y1="63" x2="95" y2="63" id="faWB3" class="wire-inactive"/>
+
+          <!-- Wire from XOR1 to XOR2 -->
+          <line x1="133" y1="55" x2="210" y2="55" id="faWXOR1" class="wire-inactive"/>
+
+          <!-- Second XOR (XOR1_out, Cin) -->
+          <path d="M 210 38 C 245 38 260 55 245 72 Q 235 65 210 72 Q 225 55 210 38Z" fill="#0b1626" stroke="#10d9a0" stroke-width="1.5"/>
+          <path d="M 207 38 Q 217 55 207 72" fill="none" stroke="#10d9a0" stroke-width="1.5"/>
+          <text x="222" y="59" fill="#10d9a0" font-family="'JetBrains Mono'" font-size="8">XOR</text>
+
+          <!-- Cin wire -->
+          <line x1="38" y1="155" x2="190" y2="155" id="faWC1" class="wire-inactive"/>
+          <line x1="190" y1="155" x2="190" y2="63" id="faWC2" class="wire-inactive"/>
+          <line x1="190" y1="63" x2="210" y2="63" id="faWC3" class="wire-inactive"/>
+
+          <!-- AND 2 (XOR1_out, Cin) -->
+          <path d="M 210 120 L 210 146 C 250 146 260 133 210 120Z" fill="#0b1626" stroke="#ff3d7f" stroke-width="1.5"/>
+          <text x="220" y="137" fill="#ff3d7f" font-family="'JetBrains Mono'" font-size="8">AND</text>
+          <!-- wire XOR1 to AND2 -->
+          <line x1="165" y1="55" x2="185" y2="55" id="faWXA" class="wire-inactive"/>
+          <line x1="185" y1="55" x2="185" y2="128" id="faWXA2" class="wire-inactive"/>
+          <line x1="185" y1="128" x2="210" y2="128" id="faWXA3" class="wire-inactive"/>
+          <!-- Cin to AND2 -->
+          <line x1="200" y1="155" x2="200" y2="138" id="faWCA1" class="wire-inactive"/>
+          <line x1="200" y1="138" x2="210" y2="138" id="faWCA2" class="wire-inactive"/>
+
+          <!-- OR Gate for Cout -->
+          <path d="M 275 105 Q 280 120 275 135 C 310 135 325 120 275 105Z" fill="#0b1626" stroke="#a855f7" stroke-width="1.5"/>
+          <text x="287" y="124" fill="#a855f7" font-family="'JetBrains Mono'" font-size="8">OR</text>
+
+          <!-- AND1 and AND2 to OR -->
+          <line x1="138" y1="99" x2="260" y2="99" id="faWAND1" class="wire-inactive"/>
+          <line x1="260" y1="99" x2="260" y2="112" id="faWAND1b" class="wire-inactive"/>
+          <line x1="260" y1="112" x2="275" y2="112" id="faWAND1c" class="wire-inactive"/>
+          <line x1="253" y1="133" x2="260" y2="133" id="faWAND2a" class="wire-inactive"/>
+          <line x1="260" y1="133" x2="260" y2="128" id="faWAND2b" class="wire-inactive"/>
+          <line x1="260" y1="128" x2="275" y2="128" id="faWAND2c" class="wire-inactive"/>
+
+          <!-- Outputs -->
+          <line x1="248" y1="55" x2="340" y2="55" id="faWSum" class="wire-inactive"/>
+          <line x1="325" y1="120" x2="340" y2="120" id="faWCout" class="wire-inactive"/>
+
+          <text x="343" y="59" fill="#10d9a0" font-family="'JetBrains Mono'" font-size="11" id="faSum">S=0</text>
+          <text x="343" y="124" fill="#fbbf24" font-family="'JetBrains Mono'" font-size="11" id="faCout">Cout=0</text>
+        </svg>
+
+        <div class="formula-box">
+          <span style="color:var(--green)">Sum</span>  = A ⊕ B ⊕ Cin<br>
+          <span style="color:var(--gold)">Cout</span> = (A·B) + (B·Cin) + (A·Cin)
+        </div>
+      </div>
+      <div>
+        <table class="truth-table" id="faTable">
+          <tr><th>A</th><th>B</th><th>Cin</th><th style="color:var(--green)">Sum</th><th style="color:var(--gold)">Cout</th></tr>
+        </table>
+        <div style="margin-top:14px;padding:12px;background:#001a2a;border:1px solid var(--cyan)44;border-radius:9px;font-size:13px;color:#94a3b8">
+          <strong style="color:var(--cyan)">Key insight:</strong> A Full Adder = 2 Half Adders + 1 OR gate. It can handle a carry input, making it suitable for all bit positions in a multi-bit adder.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-footer">
+    <button onclick="show(3)">← IEEE-754</button>
+    <span class="counter">5 / 15</span>
+    <button onclick="show(5)">Binary Adder/Subtractor →</button>
+  </div>
+</div>
+
+<!-- ═══════════════ PAGES 5–14 (placeholders loaded by JS) ═══════════════ -->
+<div class="topic-page" id="page5"></div>
+<div class="topic-page" id="page6"></div>
+<div class="topic-page" id="page7"></div>
+<div class="topic-page" id="page8"></div>
+<div class="topic-page" id="page9"></div>
+<div class="topic-page" id="page10"></div>
+<div class="topic-page" id="page11"></div>
+<div class="topic-page" id="page12"></div>
+<div class="topic-page" id="page13"></div>
+<div class="topic-page" id="page14"></div>
+
+</div><!-- /main -->
+
+<script>
+// ─── Navigation ──────────────────────────────────────────────────────────────
+let currentPage = 0;
+const totalPages = 15;
+
+function show(n) {
+  document.querySelectorAll('.topic-page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+  document.getElementById('page' + n).classList.add('active');
+  document.getElementById('nav' + n).classList.add('active');
+  currentPage = n;
+  document.getElementById('main').scrollTop = 0;
+  // Lazy load pages
+  buildPage(n);
+}
+
+// ─── Page 1: Number Representation interactive ───────────────────────────────
+function updateUnsigned(v) {
+  const bits = (+v).toString(2).padStart(8,'0');
+  const el = document.getElementById('unsignedBits');
+  el.innerHTML = bits.split('').map((b,i) => `<span class="bit-box ${b==='1'?'one':'zero'} ${i===0?'msb':''}">${b}</span>`).join('');
+  document.getElementById('unsignedValue').textContent = '= ' + v;
+  document.getElementById('unsignedNum').textContent = v;
+}
+updateUnsigned(0);
+
+function updateSM(v) {
+  const sign = v < 0 ? 1 : 0;
+  const mag = Math.abs(+v);
+  const magBits = mag.toString(2).padStart(7,'0');
+  document.getElementById('smSign').textContent = sign;
+  document.getElementById('smSign').className = 'bit-box ' + (sign ? 'one msb' : 'msb');
+  const magEl = document.getElementById('smMagBits');
+  magEl.innerHTML = magBits.split('').map(b => `<span class="bit-box ${b==='1'?'one':'zero'}">${b}</span>`).join('');
+  document.getElementById('smValue').textContent = '= ' + v;
+  document.getElementById('smNum').textContent = v;
+}
+updateSM(0);
+
+// ─── Page 2: Complements ──────────────────────────────────────────────────────
+function bitsDisplay(bin, colorFn) {
+  return bin.split('').map((b,i) => {
+    const cls = colorFn ? colorFn(b,i) : (b==='1'?'one':'zero');
+    return `<span class="bit-box ${cls} ${i===0?'msb':''}">${b}</span>`;
+  }).join('');
+}
+
+function updateComplement() {
+  const v = +document.getElementById('compSlider').value;
+  document.getElementById('compNum').textContent = v;
+  const unsigned = ((v % 256) + 256) % 256;
+  const binRaw = unsigned.toString(2).padStart(8,'0');
+  const onesArr = binRaw.split('').map(b => b==='0'?'1':'0');
+  const ones = onesArr.join('');
+  const twosVal = (parseInt(ones, 2) + 1) & 0xFF;
+  const twos = twosVal.toString(2).padStart(8,'0');
+
+  const rows = [
+    { label: 'Original Binary', bits: binRaw, color: 'var(--text)', note: `Decimal: ${v}`, bg: '#0a1525' },
+    { label: "1's Complement", bits: ones, color: 'var(--gold)', note: 'Flip ALL bits', bg: '#1a1200' },
+    { label: "2's Complement", bits: twos, color: 'var(--cyan)', note: "1's comp + 1", bg: '#001a2a' },
+  ];
+
+  document.getElementById('compRows').innerHTML = rows.map(r => `
+    <div style="background:${r.bg};border-radius:10px;padding:14px;display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+      <div style="min-width:140px;color:var(--muted);font-size:12px">${r.label}</div>
+      <div style="display:flex;gap:4px">${r.bits.split('').map((b,i)=>`<span class="bit-box ${b==='1'?'one':'zero'} ${i===0?'msb':''}" style="${i===0?'':'border-color:'+r.color+'44;color:'+r.color}">${b}</span>`).join('')}</div>
+      <div style="color:${r.color};font-size:12px">${r.note}</div>
+    </div>
+  `).join('');
+}
+updateComplement();
+document.getElementById('compSlider').oninput = updateComplement;
+
+let currentOp = '+';
+function setOp(op) {
+  currentOp = op;
+  document.getElementById('opAdd').classList.toggle('active', op==='+');
+  document.getElementById('opSub').classList.toggle('active', op==='-');
+  updateAddSub();
+}
+
+function updateAddSub() {
+  const a = parseInt(document.getElementById('addA').value) || 0;
+  const b = parseInt(document.getElementById('addB').value) || 0;
+  const bEff = currentOp === '-' ? -b : b;
+  const result = a + bEff;
+  const overflow = (result > 127 || result < -128);
+
+  const toBin = v => (((v%256)+256)%256).toString(2).padStart(8,'0');
+  const aBin = toBin(a), bBin = toBin(bEff), rBin = toBin(result);
+
+  document.getElementById('addSubDisplay').innerHTML = `
+    <div style="background:#0a1525;border-radius:12px;padding:16px;font-family:'JetBrains Mono',monospace">
+      <div style="display:flex;gap:12px;align-items:center;margin-bottom:10px">
+        <span style="color:var(--gold);min-width:100px">A = ${a}</span>
+        <div style="display:flex;gap:3px">${bitsDisplay(aBin)}</div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:center;margin-bottom:10px">
+        <span style="color:var(--green);min-width:100px">${currentOp==='+'?'B':'−B'} = ${bEff}</span>
+        <div style="display:flex;gap:3px">${bitsDisplay(bBin)}</div>
+      </div>
+      <div style="height:1px;background:var(--border);margin:10px 0"></div>
+      <div style="display:flex;gap:12px;align-items:center">
+        <span style="color:${overflow?'var(--pink)':'var(--cyan)'};min-width:100px">= ${result}</span>
+        <div style="display:flex;gap:3px">${bitsDisplay(rBin)}</div>
+        ${overflow ? '<span class="tag tag-pink">⚠ OVERFLOW!</span>' : '<span class="tag tag-green">✓ OK</span>'}
+      </div>
+    </div>
+  `;
+}
+updateAddSub();
+
+// Overflow examples
+document.getElementById('overflowExamples').innerHTML = [
+  { a: 90, b: 50, label: 'OVERFLOW: +90 + +50', ok: false },
+  { a: -90, b: -50, label: 'OVERFLOW: −90 + −50', ok: false },
+  { a: 50, b: -30, label: 'OK: +50 + −30', ok: true },
+  { a: -50, b: 30, label: 'OK: −50 + +30', ok: true },
+].map(ex => {
+  const r = ex.a + ex.b;
+  return `
+    <div style="background:${ex.ok?'#0a2a1a':'#2a0010'};border:1px solid ${ex.ok?'#10d9a044':'#ff3d7f44'};border-radius:9px;padding:12px">
+      <div style="color:${ex.ok?'var(--green)':'var(--pink)'};font-weight:700;font-size:12px;margin-bottom:4px">${ex.ok?'✅':'❌'} ${ex.label}</div>
+      <div class="mono" style="font-size:11px;color:var(--muted)">${ex.a} + ${ex.b} = ${r} ${!ex.ok?'(out of range!)':''}</div>
+    </div>
+  `;
+}).join('');
+
+// ─── Page 3: IEEE 754 ─────────────────────────────────────────────────────────
+let ieeeBits = 32;
+function setIEEEBits(n) {
+  ieeeBits = n;
+  document.getElementById('btn32').classList.toggle('active', n===32);
+  document.getElementById('btn64').classList.toggle('active', n===64);
+  updateIEEE();
+}
+
+function updateIEEE() {
+  const val = parseFloat(document.getElementById('ieeeInput').value) || 0;
+  const buf = new ArrayBuffer(ieeeBits === 32 ? 4 : 8);
+  const dv = new DataView(buf);
+  if (ieeeBits === 32) dv.setFloat32(0, val, false);
+  else dv.setFloat64(0, val, false);
+  let ieee = '';
+  for (let i = 0; i < buf.byteLength; i++) ieee += dv.getUint8(i).toString(2).padStart(8,'0');
+
+  const expLen = ieeeBits === 32 ? 8 : 11;
+  const mantLen = ieeeBits === 32 ? 23 : 52;
+  const bias = ieeeBits === 32 ? 127 : 1023;
+  const s = ieee[0];
+  const e = ieee.slice(1, 1 + expLen);
+  const m = ieee.slice(1 + expLen);
+  const eVal = parseInt(e, 2);
+  const actualE = eVal - bias;
+
+  // Bit display
+  const bitEl = document.getElementById('ieeeBitDisplay');
+  bitEl.innerHTML = [
+    { bits: s, color: 'var(--pink)', bg: '#2a0014' },
+    { bits: e, color: 'var(--gold)', bg: '#1a1200' },
+    { bits: m, color: 'var(--cyan)', bg: '#001a2a' },
+  ].map(seg => seg.bits.split('').map(b => `
+    <span style="display:inline-flex;align-items:center;justify-content:center;
+      width:${ieeeBits===32?24:14}px;height:26px;border-radius:4px;
+      font-family:'JetBrains Mono';font-weight:700;font-size:${ieeeBits===32?13:10}px;
+      background:${seg.bg};color:${b==='1'?seg.color:'#334155'};border:1px solid ${b==='1'?seg.color+'44':'var(--border)'}">${b}</span>
+  `).join('')).join('');
+
+  document.getElementById('ieeeDetails').innerHTML = `
+    <div style="background:#2a0014;border:1px solid var(--pink)44;border-radius:10px;padding:14px">
+      <div style="color:var(--pink);font-weight:700;font-size:11px;margin-bottom:6px">SIGN BIT</div>
+      <div class="mono" style="font-size:18px;color:var(--pink)">${s}</div>
+      <div style="color:var(--muted);font-size:11px;margin-top:4px">${s==='0'?'Positive (+)':'Negative (−)'}</div>
+    </div>
+    <div style="background:#1a1200;border:1px solid var(--gold)44;border-radius:10px;padding:14px">
+      <div style="color:var(--gold);font-weight:700;font-size:11px;margin-bottom:6px">EXPONENT (${expLen}-bit)</div>
+      <div class="mono" style="font-size:12px;color:var(--gold)">${eVal} − ${bias} = ${actualE}</div>
+      <div style="color:var(--muted);font-size:11px;margin-top:4px">Power of 2: 2^${actualE}</div>
+    </div>
+    <div style="background:#001a2a;border:1px solid var(--cyan)44;border-radius:10px;padding:14px">
+      <div style="color:var(--cyan);font-weight:700;font-size:11px;margin-bottom:6px">MANTISSA (${mantLen}-bit)</div>
+      <div class="mono" style="font-size:11px;color:var(--cyan)">1.${m.slice(0,10)}...</div>
+      <div style="color:var(--muted);font-size:11px;margin-top:4px">Implicit leading 1</div>
+    </div>
+  `;
+}
+updateIEEE();
+
+// ─── Page 4: Half & Full Adder ────────────────────────────────────────────────
+let haState = {A:0, B:0};
+let faState = {A:0, B:0, C:0};
+
+function toggleHA(bit) {
+  haState[bit] = 1 - haState[bit];
+  document.getElementById('ha'+bit).textContent = bit + ' = ' + haState[bit];
+  document.getElementById('ha'+bit).className = 'btn ' + (haState[bit] ? 'btn-green active' : 'btn-green');
+  updateHACircuit();
+}
+
+function updateHACircuit() {
+  const {A, B} = haState;
+  const sum = A ^ B, carry = A & B;
+  document.getElementById('haALabel').textContent = 'A=' + A;
+  document.getElementById('haBLabel').textContent = 'B=' + B;
+  document.getElementById('haSum').textContent = 'SUM=' + sum;
+  document.getElementById('haCarry').textContent = 'CARRY=' + carry;
+  // Color wires
+  const setWire = (id, active) => {
+    const el = document.getElementById(id);
+    if(el) el.className = active ? 'wire-active' : 'wire-inactive';
+  };
+  ['haWireA1','haWireA2','haWireA3'].forEach(id => setWire(id, A));
+  ['haWireB1','haWireB2','haWireB3'].forEach(id => setWire(id, B));
+  setWire('haWireSum', sum);
+  setWire('haWireCarry', carry);
+  // Highlight active truth table row
+  ['00','01','10','11'].forEach(k => {
+    const row = document.getElementById('haRow'+k);
+    if(row) row.className = (k[0]==A&&k[1]==B) ? 'hl' : '';
+  });
+}
+
+// Build full adder truth table
+(function() {
+  const tb = document.getElementById('faTable');
+  for(let i=0;i<8;i++) {
+    const a=(i>>2)&1,b=(i>>1)&1,c=i&1;
+    const s=a^b^c, co=(a&b)|(b&c)|(a&c);
+    const tr = document.createElement('tr');
+    tr.id = 'faRow'+i;
+    tr.innerHTML = `<td>${a}</td><td>${b}</td><td>${c}</td><td>${s}</td><td>${co}</td>`;
+    tb.appendChild(tr);
+  }
+})();
+
+function toggleFA(bit) {
+  faState[bit] = 1 - faState[bit];
+  const labels = {A:'faA', B:'faB', C:'faCin'};
+  const classes = {A:'btn-green', B:'btn-cyan', C:'btn-gold'};
+  document.getElementById(labels[bit]).textContent = (bit==='C'?'Cin':bit) + ' = ' + faState[bit];
+  document.getElementById(labels[bit]).className = 'btn ' + classes[bit] + (faState[bit]?' active':'');
+  updateFACircuit();
+}
+
+function updateFACircuit() {
+  const {A,B,C} = faState;
+  const s = A^B^C, co = (A&B)|(B&C)|(A&C);
+  document.getElementById('faALabel').textContent = 'A='+A;
+  document.getElementById('faBLabel').textContent = 'B='+B;
+  document.getElementById('faCLabel').textContent = 'Cin='+C;
+  document.getElementById('faSum').textContent = 'S='+s;
+  document.getElementById('faCout').textContent = 'Cout='+co;
+  // Highlight truth table row
+  const idx = (A<<2)|(B<<1)|C;
+  for(let i=0;i<8;i++) {
+    const row = document.getElementById('faRow'+i);
+    if(row) row.className = i===idx ? 'hl' : '';
+  }
+}
+
+// ─── Lazy page builder ─────────────────────────────────────────────────────
+function buildPage(n) {
+  const el = document.getElementById('page'+n);
+  if (el.dataset.built) return;
+  el.dataset.built = '1';
+
+  if(n===5) buildPage5(el);
+  if(n===6) buildPage6(el);
+  if(n===7) buildPage7(el);
+  if(n===8) buildPage8(el);
+  if(n===9) buildPage9(el);
+  if(n===10) buildPage10(el);
+  if(n===11) buildPage11(el);
+  if(n===12) buildPage12(el);
+  if(n===13) buildPage13(el);
+  if(n===14) buildPage14(el);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PAGE 5: Binary Adder / Subtractor
+// ─────────────────────────────────────────────────────────────────────────────
+function buildPage5(el) {
+  el.innerHTML = `
+  <div class="topic-header">
+    <div class="topic-tag">Unit 2 · Combinational</div>
+    <div class="topic-title" style="background:linear-gradient(90deg,var(--orange),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent">4-bit Binary Adder / Subtractor</div>
+    <div class="topic-desc">A ripple carry adder chains 4 full adders together. Adding a mode line and XOR gates converts it into an adder/subtractor circuit.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">⚙ 4-bit Ripple Carry Adder/Subtractor Circuit</div>
+    <div style="display:flex;gap:12px;margin-bottom:18px;flex-wrap:wrap;align-items:center">
+      <div style="display:flex;gap:8px;align-items:center">
+        <span style="color:var(--gold)">A (0–15):</span>
+        <input type="range" min="0" max="15" value="5" id="rca_a" oninput="updateRCA()" style="accent-color:var(--gold)">
+        <span class="mono" style="color:var(--gold);min-width:30px" id="rca_a_v">5</span>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <span style="color:var(--green)">B (0–15):</span>
+        <input type="range" min="0" max="15" value="6" id="rca_b" oninput="updateRCA()" style="accent-color:var(--green)">
+        <span class="mono" style="color:var(--green);min-width:30px" id="rca_b_v">6</span>
+      </div>
+      <div style="display:flex;gap:6px">
+        <button class="btn btn-gold active" onclick="setRCAMode(0)" id="rcaAdd">ADD</button>
+        <button class="btn btn-pink" onclick="setRCAMode(1)" id="rcaSub">SUBTRACT</button>
+      </div>
+    </div>
+
+    <svg width="100%" viewBox="0 0 760 200" id="rcaSVG">
+      <!-- 4 Full Adders (bit 3 to 0, left to right) -->
+    </svg>
+    <div id="rcaResult" style="margin-top:12px"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🔄 How Subtraction Works (A − B)</div>
+    <svg width="100%" viewBox="0 0 700 160">
+      <!-- XOR gates for inversion -->
+      <rect x="10" y="20" width="160" height="50" rx="8" fill="#2a0014" stroke="#ff3d7f" stroke-width="1.5"/>
+      <text x="90" y="42" text-anchor="middle" fill="#ff3d7f" font-family="'JetBrains Mono'" font-size="11" font-weight="700">B[3:0] → XOR gates</text>
+      <text x="90" y="58" text-anchor="middle" fill="#94a3b8" font-family="'Sora'" font-size="9">When Mode=1: B is inverted</text>
+      <text x="205" y="52" fill="#fbbf24" font-family="'JetBrains Mono'" font-size="20">→</text>
+      <rect x="230" y="20" width="180" height="50" rx="8" fill="#0a1525" stroke="#fbbf24" stroke-width="1.5"/>
+      <text x="320" y="42" text-anchor="middle" fill="#fbbf24" font-family="'JetBrains Mono'" font-size="11" font-weight="700">B̄ (1's complement)</text>
+      <text x="320" y="58" text-anchor="middle" fill="#94a3b8" font-family="'Sora'" font-size="9">All bits flipped</text>
+      <text x="425" y="52" fill="#fbbf24" font-family="'JetBrains Mono'" font-size="20">→</text>
+      <rect x="450" y="20" width="180" height="50" rx="8" fill="#001a2a" stroke="#00e5ff" stroke-width="1.5"/>
+      <text x="540" y="42" text-anchor="middle" fill="#00e5ff" font-family="'JetBrains Mono'" font-size="11" font-weight="700">B̄ + 1 = −B</text>
+      <text x="540" y="58" text-anchor="middle" fill="#94a3b8" font-family="'Sora'" font-size="9">Cin=1 adds the +1</text>
+
+      <line x1="300" y1="70" x2="300" y2="100" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="4,2"/>
+      <text x="140" y="118" fill="#94a3b8" font-family="'Sora'" font-size="11">A − B = A + (−B) = A + B̄ + 1</text>
+      <text x="140" y="136" fill="#94a3b8" font-family="'Sora'" font-size="11">Mode=0 → Cin=0 → ADD</text>
+      <text x="140" y="152" fill="#94a3b8" font-family="'Sora'" font-size="11">Mode=1 → Cin=1, XOR inverts B → SUBTRACT</text>
+    </svg>
+  </div>
+
+  <div class="card">
+    <div class="card-title">⚡ Ripple Carry Delay Problem</div>
+    <div class="grid2">
+      <div style="background:#0a1525;border-radius:10px;padding:14px;font-size:13px">
+        <div style="color:var(--pink);font-weight:700;margin-bottom:8px">Problem: Carry Propagation</div>
+        <div style="color:#94a3b8;line-height:1.8">Each carry must wait for previous bit.<br>
+        n-bit adder: delay = <span class="mono" style="color:var(--pink)">n × t_FA</span><br>
+        32-bit: waits through 32 stages!<br>
+        Very <strong style="color:var(--pink)">SLOW</strong> for large word sizes.</div>
+      </div>
+      <div style="background:#0a1525;border-radius:10px;padding:14px;font-size:13px">
+        <div style="color:var(--green);font-weight:700;margin-bottom:8px">Solution: CLA (next topic)</div>
+        <div style="color:#94a3b8;line-height:1.8">Carry Look-Ahead computes all carries simultaneously.<br>
+        Delay = <span class="mono" style="color:var(--green)">O(log n)</span><br>
+        32-bit: only ~5 gate delays!<br>
+        Much <strong style="color:var(--green)">FASTER</strong>.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-footer">
+    <button onclick="show(4)">← Half & Full Adder</button>
+    <span class="counter">6 / 15</span>
+    <button onclick="show(6)">Carry Look-Ahead →</button>
+  </div>
+  `;
+  let rcaMode = 0;
+  window.setRCAMode = function(m) {
+    rcaMode = m;
+    document.getElementById('rcaAdd').classList.toggle('active', m===0);
+    document.getElementById('rcaSub').classList.toggle('active', m===1);
+    updateRCA();
+  };
+  window.updateRCA = function() {
+    const a = +document.getElementById('rca_a').value;
+    const b = +document.getElementById('rca_b').value;
+    document.getElementById('rca_a_v').textContent = a;
+    document.getElementById('rca_b_v').textContent = b;
+    const bEff = rcaMode ? (~b & 0xF) + 1 : b;
+    const result = a + (rcaMode ? (~b & 0xF) + 1 : b);
+    const sum4 = result & 0xF;
+    const carry = (result >> 4) & 1;
+    const overflow = carry ^ ((result >> 3) & 1);
+
+    const toBin4 = v => ((v%16+16)%16).toString(2).padStart(4,'0');
+    const aBin = toBin4(a), bBin = toBin4(rcaMode ? (~b&0xF)+1 : b), rBin = toBin4(sum4);
+
+    // Draw 4-bit adder SVG
+    const svg = document.getElementById('rcaSVG');
+    let svgContent = '';
+    const faX = [610, 460, 310, 160];
+    const carries = [];
+    let cin = rcaMode ? 1 : 0;
+    const bits = [];
+    for(let i=3;i>=0;i--) {
+      const ai = (a>>i)&1, bi_raw = (b>>i)&1;
+      const bi = rcaMode ? 1-bi_raw : bi_raw;
+      const s = ai^bi^cin, co = (ai&bi)|(bi&cin)|(ai&cin);
+      bits.unshift({i, ai, bi, s, co, cin});
+      cin = co;
+    }
+    bits.forEach((bt, idx) => {
+      const x = faX[idx];
+      const col = bt.s ? 'var(--green)' : 'var(--muted)';
+      svgContent += `
+        <rect x="${x}" y="50" width="90" height="90" rx="10" fill="#0b1626" stroke="${bt.co?'var(--gold)':'var(--border)'}" stroke-width="1.5"/>
+        <text x="${x+45}" y="75" text-anchor="middle" fill="var(--cyan)" font-family="'JetBrains Mono'" font-size="11" font-weight="700">FA ${3-idx}</text>
+        <text x="${x+45}" y="93" text-anchor="middle" fill="#475569" font-family="'Sora'" font-size="9">bit ${3-idx}</text>
+        <text x="${x+15}" y="115" fill="${bt.ai?'var(--gold)':'#334155'}" font-family="'JetBrains Mono'" font-size="12">A${3-idx}=${bt.ai}</text>
+        <text x="${x+15}" y="130" fill="${bt.bi?'var(--green)':'#334155'}" font-family="'JetBrains Mono'" font-size="12">B${3-idx}=${bt.bi}</text>
+        <text x="${x+15}" y="155" fill="${bt.s?'var(--cyan)':'#334155'}" font-family="'JetBrains Mono'" font-size="12" font-weight="700">S${3-idx}=${bt.s}</text>
+        ${idx<3 ? `<line x1="${x}" y1="95" x2="${faX[idx+1]+90}" y2="95" stroke="${bt.co?'var(--gold)':'#1a3050'}" stroke-width="${bt.co?2:1.5}" stroke-dasharray="${bt.co?'':'4,2'}"/>
+        <text x="${(x+faX[idx+1]+90)/2}" y="88" text-anchor="middle" fill="${bt.co?'var(--gold)':'#334155'}" font-family="'JetBrains Mono'" font-size="10">C=${bt.co}</text>` : ''}
+      `;
+    });
+    // Cout
+    svgContent += `<text x="30" y="99" fill="${bits[0].co?'var(--pink)':'#334155'}" font-family="'JetBrains Mono'" font-size="11" font-weight="700">Cout=${bits[0].co}</text>`;
+    svgContent += `<text x="700" y="99" fill="${rcaMode?'var(--gold)':'#334155'}" font-family="'JetBrains Mono'" font-size="10">Cin=${rcaMode?1:0}</text>`;
+    svg.innerHTML = svgContent;
+
+    document.getElementById('rcaResult').innerHTML = `
+      <div style="background:#0a1525;border-radius:12px;padding:16px;font-family:'JetBrains Mono',monospace;display:flex;gap:20px;flex-wrap:wrap;align-items:center">
+        <div style="color:var(--gold)">${a} (${aBin}₂)</div>
+        <div style="color:var(--muted)">${rcaMode?'−':'+' }</div>
+        <div style="color:var(--green)">${b} (${b.toString(2).padStart(4,'0')}₂)</div>
+        <div style="color:var(--muted)">=</div>
+        <div style="color:${carry?'var(--pink)':'var(--cyan)'};font-size:18px;font-weight:700">${rcaMode ? a-b : a+b}</div>
+        <div style="color:${rBin}₂">(${rBin}₂)</div>
+        ${carry ? '<span class="tag tag-pink">Carry-out!</span>' : ''}
+      </div>
+    `;
+  };
+  updateRCA();
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PAGE 6: CLA
+// ─────────────────────────────────────────────────────────────────────────────
+function buildPage6(el) {
+  el.innerHTML = `
+  <div class="topic-header">
+    <div class="topic-tag">Unit 2 · Combinational</div>
+    <div class="topic-title" style="background:linear-gradient(90deg,var(--gold),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Carry Look-Ahead Adder (CLA)</div>
+    <div class="topic-desc">CLA eliminates the sequential carry ripple by computing ALL carries in parallel using Generate (G) and Propagate (P) signals. <strong style="color:var(--gold)">This is THE most important adder topic in your exam!</strong></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🔍 Generate & Propagate Concept</div>
+    <div class="grid2">
+      <div>
+        <div style="font-size:13px;color:#94a3b8;margin-bottom:14px">For each bit position <em>i</em>:</div>
+        <div class="formula-box" style="margin-bottom:12px">
+          <span style="color:var(--green)">Gᵢ = Aᵢ · Bᵢ</span><br>
+          <span style="color:#94a3b8;font-size:12px">Generate: this bit ALWAYS produces a carry</span>
+        </div>
+        <div class="formula-box" style="margin-bottom:12px">
+          <span style="color:var(--cyan)">Pᵢ = Aᵢ ⊕ Bᵢ</span><br>
+          <span style="color:#94a3b8;font-size:12px">Propagate: this bit PASSES a carry through</span>
+        </div>
+        <div class="formula-box">
+          <span style="color:var(--gold)">Cᵢ₊₁ = Gᵢ + Pᵢ·Cᵢ</span><br>
+          <span style="color:#94a3b8;font-size:12px">Carry is Generated OR Propagated</span>
+        </div>
+      </div>
+      <div>
+        <svg width="100%" viewBox="0 0 300 200">
+          <text x="150" y="20" text-anchor="middle" fill="#64748b" font-family="'Sora'" font-size="11">Carry Equations (4-bit)</text>
+          <rect x="10" y="30" width="280" height="155" rx="10" fill="#060e1a" stroke="#1a3050"/>
+          <text x="25" y="55" fill="#10d9a0" font-family="'JetBrains Mono'" font-size="11">C₁ = G₀ + P₀·C₀</text>
+          <text x="25" y="80" fill="#00e5ff" font-family="'JetBrains Mono'" font-size="11">C₂ = G₁ + P₁·G₀ + P₁·P₀·C₀</text>
+          <text x="25" y="105" fill="#fbbf24" font-family="'JetBrains Mono'" font-size="11">C₃ = G₂ + P₂·G₁ + P₂·P₁·G₀</text>
+          <text x="25" y="120" fill="#fbbf24" font-family="'JetBrains Mono'" font-size="10" fill-opacity="0.7">     + P₂·P₁·P₀·C₀</text>
+          <text x="25" y="148" fill="#ff3d7f" font-family="'JetBrains Mono'" font-size="11">C₄ = G₃ + P₃·G₂ + P₃·P₂·G₁</text>
+          <text x="25" y="163" fill="#ff3d7f" font-family="'JetBrains Mono'" font-size="10" fill-opacity="0.7">     + P₃·P₂·P₁·G₀ + P₃·P₂·P₁·P₀·C₀</text>
+          <text x="25" y="178" fill="#64748b" font-family="'Sora'" font-size="9">All computed simultaneously in 2 gate delays!</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">⚡ Interactive CLA Calculator</div>
+    <div style="display:flex;gap:14px;margin-bottom:16px;flex-wrap:wrap;align-items:center">
+      <div style="display:flex;gap:8px;align-items:center">
+        <span style="color:var(--gold)">A:</span>
+        <input type="range" min="0" max="15" value="9" id="cla_a" oninput="updateCLA()" style="accent-color:var(--gold)">
+        <span class="mono" style="color:var(--gold);min-width:30px" id="cla_a_v">9</span>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <span style="color:var(--green)">B:</span>
+        <input type="range" min="0" max="15" value="7" id="cla_b" oninput="updateCLA()" style="accent-color:var(--green)">
+        <span class="mono" style="color:var(--green);min-width:30px" id="cla_b_v">7</span>
+      </div>
+    </div>
+    <div id="claTable"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📊 RCA vs CLA Comparison</div>
+    <table class="truth-table">
+      <tr><th>Property</th><th style="color:var(--pink)">Ripple Carry (RCA)</th><th style="color:var(--green)">Carry Look-Ahead (CLA)</th></tr>
+      <tr><td>Carry computation</td><td style="color:var(--pink)">Sequential (ripples)</td><td style="color:var(--green)">Parallel (simultaneous)</td></tr>
+      <tr><td>Delay (n-bit)</td><td style="color:var(--pink)">O(n) — linear</td><td style="color:var(--green)">O(log n) — logarithmic</td></tr>
+      <tr><td>32-bit delay</td><td style="color:var(--pink)">~32 gate delays</td><td style="color:var(--green)">~5 gate delays</td></tr>
+      <tr><td>Hardware cost</td><td style="color:var(--green)">Simple, less gates</td><td style="color:var(--pink)">Complex, more gates</td></tr>
+      <tr><td>Power consumption</td><td style="color:var(--green)">Lower</td><td style="color:var(--pink)">Higher</td></tr>
+      <tr><td>Use case</td><td>Low-speed, low-cost</td><td style="color:var(--green)">CPUs, DSPs, GPUs</td></tr>
+    </table>
+  </div>
+
+  <div class="nav-footer">
+    <button onclick="show(5)">← Binary Adder/Subtractor</button>
+    <span class="counter">7 / 15</span>
+    <button onclick="show(7)">MUX & DEMUX →</button>
+  </div>
+  `;
+
+  window.updateCLA = function() {
+    const a = +document.getElementById('cla_a').value;
+    const b = +document.getElementById('cla_b').value;
+    document.getElementById('cla_a_v').textContent = a;
+    document.getElementById('cla_b_v').textContent = b;
+    const aBits = a.toString(2).padStart(4,'0').split('').map(Number);
+    const bBits = b.toString(2).padStart(4,'0').split('').map(Number);
+    const P = aBits.map((ai,i) => ai ^ bBits[i]);
+    const G = aBits.map((ai,i) => ai & bBits[i]);
+    let c = 0;
+    const carries = [0];
+    for(let i=3;i>=0;i--) {
+      c = G[i] | (P[i] & c);
+      carries.unshift(c);
+    }
+    const sum = aBits.map((ai,i) => ai ^ bBits[i] ^ carries[i+1]);
+    const result = parseInt(sum.join(''),2);
+
+    document.getElementById('claTable').innerHTML = `
+      <div style="overflow-x:auto">
+      <table class="truth-table" style="min-width:500px">
+        <tr><th>Bit</th><th>A</th><th>B</th><th style="color:var(--green)">G = A·B</th><th style="color:var(--cyan)">P = A⊕B</th><th style="color:var(--gold)">Carry In</th><th style="color:var(--pink)">Sum</th></tr>
+        ${[0,1,2,3].map(i => `
+          <tr>
+            <td>${i}</td>
+            <td style="color:var(--gold)">${aBits[i]}</td>
+            <td style="color:var(--green)">${bBits[i]}</td>
+            <td style="color:${G[i]?'var(--green)':'var(--muted)'};font-weight:${G[i]?700:400}">${G[i]}</td>
+            <td style="color:${P[i]?'var(--cyan)':'var(--muted)'};font-weight:${P[i]?700:400}">${P[i]}</td>
+            <td style="color:${carries[i+1]?'var(--gold)':'var(--muted)'}">${carries[i+1]}</td>
+            <td style="color:${sum[i]?'var(--pink)':'var(--muted)'};font-weight:700">${sum[i]}</td>
+          </tr>
+        `).join('')}
+      </table>
+      </div>
+      <div style="margin-top:14px;background:#0a1525;border-radius:10px;padding:14px;font-family:'JetBrains Mono',monospace">
+        <span style="color:var(--gold)">${a}</span> + <span style="color:var(--green)">${b}</span> = 
+        <span style="color:var(--cyan);font-size:20px;font-weight:700">${result}</span>
+        <span style="color:var(--muted);font-size:13px;margin-left:10px">(${carries[0]?'Carry-out!':'No carry'})</span>
+      </div>
+    `;
+  };
+  updateCLA();
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PAGE 7: MUX & DEMUX
+// ─────────────────────────────────────────────────────────────────────────────
+function buildPage7(el) {
+  el.innerHTML = `
+  <div class="topic-header">
+    <div class="topic-tag">Unit 2 · Combinational</div>
+    <div class="topic-title" style="background:linear-gradient(90deg,var(--orange),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Multiplexer & Demultiplexer</div>
+    <div class="topic-desc">MUX and DEMUX are fundamental data routing circuits. MUX selects one of N inputs; DEMUX routes one input to one of N outputs.</div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title" style="color:var(--orange)">4×1 Multiplexer (MUX)</div>
+      <div style="font-size:13px;color:#94a3b8;margin-bottom:14px"><strong>Many inputs → 1 output</strong>. Selection lines pick which input passes through.</div>
+      <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap">
+        ${[0,1,2,3].map(i=>`<div>
+          <div style="color:var(--muted);font-size:11px;text-align:center;margin-bottom:4px">I${i}</div>
+          <button class="btn btn-gold" onclick="toggleMuxInput(${i})" id="muxI${i}" style="width:44px;height:44px;padding:0;font-size:16px">0</button>
+        </div>`).join('')}
+      </div>
+      <div style="display:flex;gap:6px;margin-bottom:16px;align-items:center">
+        <span style="color:var(--muted);font-size:12px">S1S0:</span>
+        ${[0,1,2,3].map(i=>`<button class="step-btn" onclick="setMuxSel(${i})" id="muxSel${i}">${i.toString(2).padStart(2,'0')}</button>`).join('')}
+      </div>
+      <svg width="100%" viewBox="0 0 280 200" id="muxSVG"></svg>
+      <div id="muxResult" style="margin-top:8px"></div>
+      <div class="formula-box" style="margin-top:12px">
+        Y = I₀·S̄₁·S̄₀ + I₁·S̄₁·S₀ + I₂·S₁·S̄₀ + I₃·S₁·S₀
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title" style="color:var(--pink)">1×4 Demultiplexer (DEMUX)</div>
+      <div style="font-size:13px;color:#94a3b8;margin-bottom:14px"><strong>1 input → selected output</strong>. The input is routed to ONE of 4 outputs.</div>
+      <div style="display:flex;gap:8px;margin-bottom:14px;align-items:center;flex-wrap:wrap">
+        <span style="color:var(--muted);font-size:12px">Input:</span>
+        <button class="btn btn-pink" onclick="toggleDemuxIn()" id="demuxIn">D = 0</button>
+        <span style="color:var(--muted);font-size:12px">Select:</span>
+        ${[0,1,2,3].map(i=>`<button class="step-btn" onclick="setDemuxSel(${i})" id="demSel${i}">${i.toString(2).padStart(2,'0')}</button>`).join('')}
+      </div>
+      <div id="demuxOutputs" style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px"></div>
+      <div class="formula-box">
+        Y₀=D·S̄₁·S̄₀, Y₁=D·S̄₁·S₀<br>
+        Y₂=D·S₁·S̄₀, Y₃=D·S₁·S₀
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📊 Truth Tables</div>
+    <div class="grid2">
+      <div>
+        <div style="color:var(--orange);font-weight:700;margin-bottom:10px;font-size:13px">4×1 MUX</div>
+        <table class="truth-table">
+          <tr><th>S₁</th><th>S₀</th><th>Output Y</th></tr>
+          <tr><td>0</td><td>0</td><td>I₀</td></tr>
+          <tr><td>0</td><td>1</td><td>I₁</td></tr>
+          <tr><td>1</td><td>0</td><td>I₂</td></tr>
+          <tr><td>1</td><td>1</td><td>I₃</td></tr>
+        </table>
+      </div>
+      <div>
+        <div style="color:var(--pink);font-weight:700;margin-bottom:10px;font-size:13px">1×4 DEMUX</div>
+        <table class="truth-table">
+          <tr><th>S₁</th><th>S₀</th><th>Active Output</th></tr>
+          <tr><td>0</td><td>0</td><td>Y₀ = D</td></tr>
+          <tr><td>0</td><td>1</td><td>Y₁ = D</td></tr>
+          <tr><td>1</td><td>0</td><td>Y₂ = D</td></tr>
+          <tr><td>1</td><td>1</td><td>Y₃ = D</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-footer">
+    <button onclick="show(6)">← Carry Look-Ahead</button>
+    <span class="counter">8 / 15</span>
+    <button onclick="show(8)">Register & Bus Transfer →</button>
+  </div>
+  `;
+
+  let muxInputs=[0,0,0,0], muxSel=0, demuxIn=0, demuxSel=0;
+  window.toggleMuxInput=function(i){muxInputs[i]=1-muxInputs[i];document.getElementById('muxI'+i).textContent=muxInputs[i];document.getElementById('muxI'+i).className='btn '+(muxInputs[i]?'btn-gold active':'btn-gold');renderMux();};
+  window.setMuxSel=function(s){muxSel=s;[0,1,2,3].forEach(i=>{const b=document.getElementById('muxSel'+i);b.className='step-btn'+(i===s?' active':'');});renderMux();};
+  window.toggleDemuxIn=function(){demuxIn=1-demuxIn;document.getElementById('demuxIn').textContent='D = '+demuxIn;document.getElementById('demuxIn').className='btn btn-pink'+(demuxIn?' active':'');renderDemux();};
+  window.setDemuxSel=function(s){demuxSel=s;[0,1,2,3].forEach(i=>{const b=document.getElementById('demSel'+i);b.className='step-btn'+(i===s?' active':'');});renderDemux();};
+
+  function renderMux() {
+    const out = muxInputs[muxSel];
+    const svg = document.getElementById('muxSVG');
+    let s = '';
+    const inputY = [30,65,100,135];
+    inputY.forEach((y,i) => {
+      const active = i === muxSel;
+      s += `<line x1="30" y1="${y+8}" x2="100" y2="${y+8}" stroke="${active?'var(--orange)':'#1a3050'}" stroke-width="${active?2:1.5}"/>`;
+      s += `<text x="5" y="${y+14}" fill="${muxInputs[i]?'var(--gold)':'#334155'}" font-family="'JetBrains Mono'" font-size="12" font-weight="700">I${i}=${muxInputs[i]}</text>`;
+    });
+    // MUX box
+    s += `<polygon points="100,20 160,50 160,130 100,160" fill="#0b1626" stroke="var(--orange)" stroke-width="2"/>`;
+    s += `<text x="125" y="92" text-anchor="middle" fill="var(--orange)" font-family="'JetBrains Mono'" font-size="11" font-weight="700">MUX</text>`;
+    s += `<text x="125" y="108" text-anchor="middle" fill="var(--muted)" font-family="'JetBrains Mono'" font-size="10">4×1</text>`;
+    // Output
+    s += `<line x1="160" y1="90" x2="230" y2="90" stroke="${out?'var(--orange)':'#1a3050'}" stroke-width="2"/>`;
+    s += `<rect x="230" y="78" width="44" height="24" rx="6" fill="${out?'#2a1000':'#0b1626'}" stroke="${out?'var(--orange)':'var(--border)'}"/>`;
+    s += `<text x="252" y="94" text-anchor="middle" fill="${out?'var(--gold)':'#334155'}" font-family="'JetBrains Mono'" font-size="13" font-weight="700">Y=${out}</text>`;
+    // Sel
+    s += `<line x1="130" y1="170" x2="130" y2="160" stroke="var(--cyan)" stroke-width="1.5" stroke-dasharray="3,2"/>`;
+    s += `<text x="130" y="188" text-anchor="middle" fill="var(--cyan)" font-family="'JetBrains Mono'" font-size="10">S=${muxSel.toString(2).padStart(2,'0')}</text>`;
+    svg.innerHTML = s;
+    document.getElementById('muxResult').innerHTML = `<div style="text-align:center;color:var(--orange);font-family:'JetBrains Mono';font-size:14px">Selects I${muxSel} = <strong style="color:var(--gold);font-size:18px">${muxInputs[muxSel]}</strong></div>`;
+  }
+
+  function renderDemux() {
+    const outs = [0,1,2,3].map(i => i===demuxSel ? demuxIn : 0);
+    document.getElementById('demuxOutputs').innerHTML = outs.map((v,i) => `
+      <div style="display:flex;gap:10px;align-items:center;padding:10px 14px;background:${i===demuxSel?'#2a1000':'#0b1626'};border-radius:9px;border:1px solid ${i===demuxSel?'var(--pink)':'var(--border)'}">
+        <span style="color:var(--muted);min-width:30px;font-family:'JetBrains Mono';font-size:13px">Y${i}:</span>
+        <div style="width:32px;height:32px;border-radius:7px;display:flex;align-items:center;justify-content:center;background:${v?'var(--pink)':'#0a1525'};color:${v?'#fff':'#334155'};font-family:'JetBrains Mono';font-weight:700;font-size:16px">${v}</div>
+        ${i===demuxSel ? `<span class="tag tag-pink">← selected (S=${demuxSel.toString(2).padStart(2,'0')})</span>` : ''}
+      </div>
+    `).join('');
+  }
+  setMuxSel(0);renderMux();setDemuxSel(0);renderDemux();
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PAGE 8: Register & Bus Transfer
+// ─────────────────────────────────────────────────────────────────────────────
+function buildPage8(el) {
+  el.innerHTML = `
+  <div class="topic-header">
+    <div class="topic-tag">Unit 3 · CPU Organization</div>
+    <div class="topic-title" style="background:linear-gradient(90deg,#b5ead7,var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Register, Bus & Memory Transfer</div>
+    <div class="topic-desc">Registers are fast storage inside CPU. The common bus system allows transfer of data between registers, memory, and ALU using Register Transfer Language (RTL).</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📋 Register Transfer Language (RTL)</div>
+    <div class="grid2">
+      <div>
+        <div style="font-size:13px;color:#94a3b8;margin-bottom:14px">RTL describes operations at register level:</div>
+        <div class="formula-box" style="margin-bottom:10px"><span style="color:var(--cyan)">R2 ← R1</span><br><span style="color:#64748b;font-size:12px">Transfer contents of R1 to R2</span></div>
+        <div class="formula-box" style="margin-bottom:10px"><span style="color:var(--gold)">R2 ← R1 + R3</span><br><span style="color:#64748b;font-size:12px">Add R1 and R3, store in R2</span></div>
+        <div class="formula-box" style="margin-bottom:10px"><span style="color:var(--pink)">if (P=1): R2 ← R1</span><br><span style="color:#64748b;font-size:12px">Conditional transfer</span></div>
+        <div class="formula-box"><span style="color:var(--green)">M[MAR] ← MDR</span><br><span style="color:#64748b;font-size:12px">Memory write at address in MAR</span></div>
+      </div>
+      <div>
+        <table class="truth-table">
+          <tr><th>Register</th><th>Full Name</th><th>Purpose</th></tr>
+          <tr><td style="color:var(--cyan)">PC</td><td>Program Counter</td><td>Next instruction address</td></tr>
+          <tr><td style="color:var(--gold)">MAR</td><td>Memory Address Reg</td><td>Address for memory access</td></tr>
+          <tr><td style="color:var(--pink)">MDR</td><td>Memory Data Reg</td><td>Data to/from memory</td></tr>
+          <tr><td style="color:var(--green)">IR</td><td>Instruction Reg</td><td>Current instruction</td></tr>
+          <tr><td style="color:var(--purple)">AC/ACC</td><td>Accumulator</td><td>ALU operand/result</td></tr>
+          <tr><td style="color:var(--orange)">SP</td><td>Stack Pointer</td><td>Top of stack address</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🚌 Common Bus System — Interactive</div>
+    <div style="font-size:13px;color:#94a3b8;margin-bottom:16px">Only ONE register can <strong style="color:var(--gold)">drive the bus</strong> at a time. Multiple registers can <strong style="color:var(--cyan)">receive</strong> simultaneously.</div>
+    <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;align-items:center">
+      <label style="color:var(--muted);font-size:13px">From:</label>
+      <select id="busFrom" onchange="updateBus()">
+        <option>R1</option><option>R2</option><option>R3</option><option>R4</option><option>MAR</option><option>MDR</option><option>ACC</option><option>PC</option>
+      </select>
+      <label style="color:var(--muted);font-size:13px">To:</label>
+      <select id="busTo" onchange="updateBus()">
+        <option>R2</option><option>R1</option><option>R3</option><option>R4</option><option>MAR</option><option>MDR</option><option>ACC</option><option>PC</option>
+      </select>
+      <button class="btn btn-cyan" id="busTransferBtn" onclick="doBusTransfer()">▶ Transfer</button>
+      <span id="busStatus" style="font-family:'JetBrains Mono';font-size:13px;color:var(--muted)"></span>
+    </div>
+    <svg width="100%" viewBox="0 0 700 200" id="busSVG"></svg>
+    <div id="rtlStatement" style="margin-top:12px"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">💾 Memory Transfer Operations</div>
+    <div class="grid2">
+      <div>
+        <div style="color:var(--green);font-weight:700;margin-bottom:10px;font-size:13px">READ Operation</div>
+        <div style="background:#0a1525;border-radius:10px;padding:14px;font-family:'JetBrains Mono';font-size:12px;line-height:2">
+          <div><span style="color:var(--gold)">1.</span> MAR ← Address</div>
+          <div><span style="color:var(--gold)">2.</span> MDR ← M[MAR]</div>
+          <div><span style="color:var(--gold)">3.</span> R ← MDR</div>
+        </div>
+      </div>
+      <div>
+        <div style="color:var(--pink);font-weight:700;margin-bottom:10px;font-size:13px">WRITE Operation</div>
+        <div style="background:#0a1525;border-radius:10px;padding:14px;font-family:'JetBrains Mono';font-size:12px;line-height:2">
+          <div><span style="color:var(--gold)">1.</span> MAR ← Address</div>
+          <div><span style="color:var(--gold)">2.</span> MDR ← Data</div>
+          <div><span style="color:var(--gold)">3.</span> M[MAR] ← MDR</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-footer">
+    <button onclick="show(7)">← MUX & DEMUX</button>
+    <span class="counter">9 / 15</span>
+    <button onclick="show(9)">Booth's Algorithm →</button>
+  </div>
+  `;
+
+  window.updateBus = function() {
+    const from = document.getElementById('busFrom').value;
+    const to = document.getElementById('busTo').value;
+    document.getElementById('rtlStatement').innerHTML = `
+      <div class="formula-box"><span style="color:var(--cyan)">${to} ← ${from}</span><span style="color:#475569;margin-left:16px;font-size:12px">"Transfer ${from} to ${to} via bus"</span></div>
+    `;
+    renderBusSVG(from, to, false);
+  };
+
+  let busAnimating = false;
+  window.doBusTransfer = function() {
+    if(busAnimating) return;
+    busAnimating = true;
+    const from = document.getElementById('busFrom').value;
+    const to = document.getElementById('busTo').value;
+    renderBusSVG(from, to, true);
+    document.getElementById('busStatus').textContent = `✓ ${from} → ${to} transferred!`;
+    setTimeout(() => { busAnimating=false; }, 1500);
+  };
+
+  const regs = ['R1','R2','R3','R4','MAR','MDR','ACC','PC'];
+  function renderBusSVG(from, to, active) {
+    const svg = document.getElementById('busSVG');
+    const cols = 4, cellW = 160, cellH = 65;
+    let s = '';
+    // Bus line
+    s += `<rect x="10" y="88" width="680" height="16" rx="6" fill="${active?'#00e5ff22':'#0b1626'}" stroke="${active?'var(--cyan)':'#1a3050'}" stroke-width="${active?2:1}"/>`;
+    s += `<text x="350" y="100" text-anchor="middle" fill="${active?'var(--cyan)':'#334155'}" font-family="'JetBrains Mono'" font-size="10" font-weight="700">COMMON BUS</text>`;
+    regs.forEach((r,i) => {
+      const row = Math.floor(i/cols), col = i%cols;
+      const x = 20 + col*175, y = row===0 ? 10 : 135;
+      const isFrom = r===from, isTo = r===to;
+      s += `<rect x="${x}" y="${y}" width="130" height="45" rx="9" fill="${isFrom?'#0a2a1a':isTo?'#0a1a2a':'#0b1626'}" stroke="${isFrom?'var(--green)':isTo?'var(--cyan)':'var(--border)'}" stroke-width="${(isFrom||isTo)?2:1}"/>`;
+      s += `<text x="${x+65}" y="${y+22}" text-anchor="middle" fill="${isFrom?'var(--green)':isTo?'var(--cyan)':'#64748b'}" font-family="'JetBrains Mono'" font-size="13" font-weight="700">${r}</text>`;
+      s += `<text x="${x+65}" y="${y+36}" text-anchor="middle" fill="#334155" font-family="'Sora'" font-size="9">${isFrom?'SOURCE':isTo?'DEST':''}</text>`;
+      // Wire to bus
+      const wireX = x+65, topY = row===0 ? y+45 : y;
+      s += `<line x1="${wireX}" y1="${topY}" x2="${wireX}" y2="${row===0?88:135}" stroke="${(isFrom||isTo)?'var(--cyan)':'#1a3050'}" stroke-width="${(isFrom||isTo)?2:1}"/>`;
+    });
+    svg.innerHTML = s;
+  }
+  updateBus();
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PAGE 9: Booth's Algorithm
+// ─────────────────────────────────────────────────────────────────────────────
+function buildPage9(el) {
+  el.innerHTML = `
+  <div class="topic-header">
+    <div class="topic-tag">Unit 3 · CPU Arithmetic</div>
+    <div class="topic-title" style="background:linear-gradient(90deg,var(--cyan),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Booth's Algorithm</div>
+    <div class="topic-desc">Booth's algorithm multiplies <strong>signed binary numbers</strong> efficiently by examining bit pairs and using subtract/add/no-op to reduce operations. Essential exam topic!</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📋 Algorithm Rules (MEMORIZE THIS)</div>
+    <div class="grid2">
+      <div>
+        <table class="truth-table">
+          <tr><th>Q₀ (current)</th><th>Q₋₁ (prev)</th><th>Operation</th></tr>
+          <tr><td>0</td><td>0</td><td style="color:var(--muted)">No operation (shift only)</td></tr>
+          <tr><td>0</td><td>1</td><td style="color:var(--green)">A ← A + M (Add)</td></tr>
+          <tr><td>1</td><td>0</td><td style="color:var(--pink)">A ← A − M (Subtract)</td></tr>
+          <tr><td>1</td><td>1</td><td style="color:var(--muted)">No operation (shift only)</td></tr>
+        </table>
+        <div style="margin-top:12px;font-size:13px;color:#94a3b8">After each operation: <strong style="color:var(--cyan)">Arithmetic Right Shift</strong> (ARS) the combined [A | Q | Q₋₁] register.</div>
+      </div>
+      <div>
+        <div class="formula-box">
+          <span style="color:var(--gold)">Registers:</span><br>
+          • A = Accumulator (n bits, init = 0)<br>
+          • Q = Multiplier (n bits)<br>
+          • Q₋₁ = Extra bit (init = 0)<br>
+          • M = Multiplicand<br>
+          • n = number of iterations
+        </div>
+        <div style="margin-top:10px;background:#001a2a;border:1px solid var(--cyan)44;border-radius:9px;padding:12px;font-size:13px;color:#94a3b8">
+          <strong style="color:var(--cyan)">ARS (Arithmetic Right Shift):</strong> MSB is preserved (sign extension). The rightmost bit of A enters Q's MSB.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">⚡ Interactive Booth's Calculator</div>
+    <div style="display:flex;gap:14px;margin-bottom:18px;flex-wrap:wrap;align-items:center">
+      <div style="display:flex;gap:8px;align-items:center">
+        <span style="color:var(--gold)">Multiplicand M:</span>
+        <input type="number" min="-8" max="7" value="3" id="booth_m" style="width:70px" oninput="runBooth()">
+        <span style="color:var(--muted);font-size:12px">(−8 to 7)</span>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <span style="color:var(--cyan)">Multiplier Q:</span>
+        <input type="number" min="-8" max="7" value="-2" id="booth_q" style="width:70px" oninput="runBooth()">
+        <span style="color:var(--muted);font-size:12px">(−8 to 7)</span>
+      </div>
+    </div>
+    <div id="boothTable"></div>
+    <div id="boothResult" style="margin-top:14px"></div>
+  </div>
+
+  <div class="nav-footer">
+    <button onclick="show(8)">← Register & Bus Transfer</button>
+    <span class="counter">10 / 15</span>
+    <button onclick="show(10)">Processor Organization →</button>
+  </div>
+  `;
+
+  window.runBooth = function() {
+    const M = parseInt(document.getElementById('booth_m').value) || 0;
+    const Q_init = parseInt(document.getElementById('booth_q').value) || 0;
+    const n = 4;
+    const mask = (1<<n)-1;
+    const toSigned = v => v & (1<<(n-1)) ? v - (1<<n) : v;
+    const toNbit = v => ((v%16)+16)%16;
+    const toBin = v => toNbit(v).toString(2).padStart(n,'0');
+
+    let A = 0, Q = toNbit(Q_init), Q1 = 0;
+    const rows = [];
+    rows.push({ step:'Initial', A:toBin(A), Q:toBin(Q), Q1, op:'Set A=0, Q₋₁=0' });
+
+    for(let i=0;i<n;i++) {
+      const q0 = Q & 1;
+      let op = 'No operation';
+      let opColor = 'var(--muted)';
+      if(q0===1 && Q1===0) {
+        A = (A - toNbit(M)) & mask;
+        op = `A ← A − M (${toSigned(A+toNbit(M))} − ${M})`;
+        opColor = 'var(--pink)';
+      } else if(q0===0 && Q1===1) {
+        A = (A + toNbit(M)) & mask;
+        op = `A ← A + M (add ${M})`;
+        opColor = 'var(--green)';
+      }
+      rows.push({ step:`Step ${i+1} (op)`, A:toBin(A), Q:toBin(Q), Q1, op, opColor });
+
+      // ARS
+      const signA = (A >> (n-1)) & 1;
+      const combined = ((A<<n)|Q)>>1;
+      Q1 = Q & 1;
+      Q = combined & mask;
+      A = (signA<<(n-1)) | ((combined>>n) & ((1<<(n-1))-1));
+
+      rows.push({ step:`Step ${i+1} (ARS)`, A:toBin(A), Q:toBin(Q), Q1, op:'Arithmetic Right Shift', opColor:'var(--cyan)' });
+    }
+
+    const result = M * Q_init;
+    document.getElementById('boothTable').innerHTML = `
+      <div style="overflow-x:auto">
+      <table class="truth-table" style="min-width:500px">
+        <tr><th>Step</th><th style="color:var(--pink)">A (Accumulator)</th><th style="color:var(--green)">Q (Multiplier)</th><th style="color:var(--gold)">Q₋₁</th><th>Operation</th></tr>
+        ${rows.map(r=>`
+          <tr>
+            <td class="mono" style="font-size:11px">${r.step}</td>
+            <td class="mono" style="color:var(--pink);letter-spacing:2px">${r.A}</td>
+            <td class="mono" style="color:var(--green);letter-spacing:2px">${r.Q}</td>
+            <td class="mono" style="color:var(--gold)">${r.Q1}</td>
+            <td style="color:${r.opColor||'var(--muted)'};font-size:12px">${r.op}</td>
+          </tr>
+        `).join('')}
+      </table>
+      </div>
+    `;
+    document.getElementById('boothResult').innerHTML = `
+      <div style="background:#001a2a;border:1px solid var(--cyan);border-radius:12px;padding:16px;font-family:'JetBrains Mono'">
+        <span style="color:var(--gold)">${M}</span> × <span style="color:var(--cyan)">${Q_init}</span> = 
+        <span style="color:var(--green);font-size:22px;font-weight:700"> ${result}</span>
+        <span style="color:var(--muted);margin-left:10px;font-size:13px">Final: [A|Q] = ${toBin(toNbit(result>>4))} ${toBin(toNbit(result))}</span>
+      </div>
+    `;
+  };
+  runBooth();
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PAGE 10: Processor Organization
+// ─────────────────────────────────────────────────────────────────────────────
+function buildPage10(el) {
+  el.innerHTML = `
+  <div class="topic-header">
+    <div class="topic-tag">Unit 3 · CPU</div>
+    <div class="topic-title" style="background:linear-gradient(90deg,var(--purple),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Processor Organization</div>
+    <div class="topic-desc">How the CPU is internally organized. Two main approaches: General Register Organization (multiple registers, flexible) and Accumulator Organization (single AC register).</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🏗 General Register Organization</div>
+    <svg width="100%" viewBox="0 0 700 280">
+      <!-- Register File -->
+      <rect x="10" y="10" width="140" height="260" rx="12" fill="#0b1626" stroke="#fbbf24" stroke-width="2"/>
+      <text x="80" y="35" text-anchor="middle" fill="#fbbf24" font-family="'JetBrains Mono'" font-size="11" font-weight="700">REGISTER</text>
+      <text x="80" y="50" text-anchor="middle" fill="#fbbf24" font-family="'JetBrains Mono'" font-size="11" font-weight="700">FILE</text>
+      ${['R0','R1','R2','R3','R4','R5','R6','R7'].map((r,i)=>`
+        <rect x="20" y="${65+i*24}" width="120" height="20" rx="4" fill="#060c18" stroke="#1a3050"/>
+        <text x="80" y="${79+i*24}" text-anchor="middle" fill="#94a3b8" font-family="'JetBrains Mono'" font-size="11">${r}</text>
+      `).join('')}
+
+      <!-- MUX A -->
+      <polygon points="170,60 200,80 200,160 170,180" fill="#0b1626" stroke="#00e5ff" stroke-width="1.5"/>
+      <text x="180" y="124" fill="#00e5ff" font-family="'JetBrains Mono'" font-size="9">MUX</text>
+      <text x="180" y="136" fill="#00e5ff" font-family="'JetBrains Mono'" font-size="9">A</text>
+
+      <!-- MUX B -->
+      <polygon points="220,60 250,80 250,160 220,180" fill="#0b1626" stroke="#10d9a0" stroke-width="1.5"/>
+      <text x="230" y="124" fill="#10d9a0" font-family="'JetBrains Mono'" font-size="9">MUX</text>
+      <text x="230" y="136" fill="#10d9a0" font-family="'JetBrains Mono'" font-size="9">B</text>
+
+      <!-- A-bus, B-bus lines -->
+      <line x1="200" y1="120" x2="310" y2="120" stroke="#00e5ff" stroke-width="2"/>
+      <text x="255" y="115" text-anchor="middle" fill="#00e5ff" font-family="'Sora'" font-size="9">A-Bus</text>
+      <line x1="250" y1="140" x2="310" y2="140" stroke="#10d9a0" stroke-width="2"/>
+      <text x="280" y="155" text-anchor="middle" fill="#10d9a0" font-family="'Sora'" font-size="9">B-Bus</text>
+
+      <!-- ALU -->
+      <polygon points="310,80 420,100 420,165 310,185" fill="#0b1626" stroke="#ff3d7f" stroke-width="2"/>
+      <text x="365" y="130" text-anchor="middle" fill="#ff3d7f" font-family="'JetBrains Mono'" font-size="13" font-weight="700">ALU</text>
+      <text x="365" y="148" text-anchor="middle" fill="#475569" font-family="'Sora'" font-size="9">+  −  ×  ÷</text>
+      <text x="365" y="162" text-anchor="middle" fill="#475569" font-family="'Sora'" font-size="9">AND OR SHL</text>
+
+      <!-- Status flags -->
+      <rect x="430" y="70" width="90" height="80" rx="8" fill="#0b1626" stroke="#a855f7" stroke-width="1.5"/>
+      <text x="475" y="90" text-anchor="middle" fill="#a855f7" font-family="'JetBrains Mono'" font-size="10" font-weight="700">FLAGS</text>
+      <text x="475" y="108" text-anchor="middle" fill="#94a3b8" font-family="'JetBrains Mono'" font-size="10">Z  N  C</text>
+      <text x="475" y="124" text-anchor="middle" fill="#94a3b8" font-family="'JetBrains Mono'" font-size="10">V  P  H</text>
+      <text x="432" y="165" fill="#475569" font-family="'Sora'" font-size="8">Zero,Neg,Carry,Overflow</text>
+      <line x1="420" y1="115" x2="430" y2="115" stroke="#a855f7" stroke-width="1.5"/>
+
+      <!-- Output MUX -->
+      <polygon points="420,165 540,145 540,185 420,185" fill="#0b1626" stroke="#00e5ff" stroke-width="1.5"/>
+      <text x="480" y="170" text-anchor="middle" fill="#00e5ff" font-family="'JetBrains Mono'" font-size="9">MUX</text>
+
+      <!-- C-bus back to register file -->
+      <line x1="540" y1="165" x2="580" y2="165" stroke="#fbbf24" stroke-width="2"/>
+      <line x1="580" y1="165" x2="580" y2="270" stroke="#fbbf24" stroke-width="2" stroke-dasharray="4,2"/>
+      <line x1="580" y1="270" x2="80" y2="270" stroke="#fbbf24" stroke-width="2" stroke-dasharray="4,2"/>
+      <line x1="80" y1="270" x2="80" y2="260" stroke="#fbbf24" stroke-width="2" marker-end="url(#arrg)"/>
+      <text x="400" y="285" text-anchor="middle" fill="#fbbf24" font-family="'JetBrains Mono'" font-size="10">C-Bus (Result back to register file)</text>
+
+      <!-- Control unit -->
+      <rect x="540" y="60" width="140" height="80" rx="10" fill="#0b1626" stroke="#f97316" stroke-width="1.5"/>
+      <text x="610" y="85" text-anchor="middle" fill="#f97316" font-family="'JetBrains Mono'" font-size="11" font-weight="700">CONTROL</text>
+      <text x="610" y="100" text-anchor="middle" fill="#f97316" font-family="'JetBrains Mono'" font-size="11" font-weight="700">UNIT</text>
+      <text x="610" y="116" text-anchor="middle" fill="#475569" font-family="'Sora'" font-size="9">SELA SELB SELC OPR</text>
+      <text x="610" y="130" text-anchor="middle" fill="#475569" font-family="'Sora'" font-size="9">Selection Signals</text>
+    </svg>
+    <div style="font-size:13px;color:#94a3b8;margin-top:10px">
+      <strong style="color:var(--gold)">SELA</strong>: selects source for A-bus | <strong style="color:var(--green)">SELB</strong>: selects source for B-bus | <strong style="color:var(--cyan)">SELC</strong>: selects destination | <strong style="color:var(--pink)">OPR</strong>: ALU operation code
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📊 Instruction Types for Register Organization</div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:13px;display:flex;flex-direction:column;gap:10px">
+      ${[
+        { inst:'R1 ← R2 + R3', type:'3-register', color:'var(--cyan)', desc:'3 fields: dest, src1, src2' },
+        { inst:'R1 ← R1 + R2', type:'2-register', color:'var(--gold)', desc:'Dest doubles as src1' },
+        { inst:'R1 ← R1 + M[addr]', type:'1-register', color:'var(--green)', desc:'One register + memory addr' },
+        { inst:'AC ← AC + M[addr]', type:'accumulator', color:'var(--pink)', desc:'Implicit AC register' },
+      ].map(r=>`
+        <div style="background:#0a1525;border-radius:9px;padding:12px;display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+          <code style="color:${r.color};min-width:200px">${r.inst}</code>
+          <span class="tag" style="background:#0a1525;color:${r.color};border-color:${r.color}44">${r.type}</span>
+          <span style="color:var(--muted);font-size:12px">${r.desc}</span>
+        </div>
+      `).join('')}
+    </div>
+  </div>
+
+  <div class="nav-footer">
+    <button onclick="show(9)">← Booth's Algorithm</button>
+    <span class="counter">11 / 15</span>
+    <button onclick="show(11)">Stack Organization →</button>
+  </div>
+  `;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PAGE 11: Stack Organization
+// ─────────────────────────────────────────────────────────────────────────────
+function buildPage11(el) {
+  el.innerHTML = `
+  <div class="topic-header">
+    <div class="topic-tag">Unit 3 · CPU</div>
+    <div class="topic-title" style="background:linear-gradient(90deg,var(--green),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Stack Organization</div>
+    <div class="topic-desc">A stack is a LIFO (Last-In First-Out) storage structure. The CPU uses a hardware stack for function calls, interrupts, and zero-address arithmetic (RPN).</div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title" style="color:var(--green)">🥞 Stack Operations — Interactive</div>
+      <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center">
+        <input type="number" value="42" id="pushVal" style="width:80px" placeholder="value">
+        <button class="btn btn-green" onclick="stackPush()">PUSH</button>
+        <button class="btn btn-pink" onclick="stackPop()">POP</button>
+        <button class="btn btn-gold" onclick="stackPeek()">PEEK</button>
+        <button class="btn btn-cyan" onclick="stackClear()">CLEAR</button>
+      </div>
+      <div id="stackViz" style="display:flex;flex-direction:column-reverse;gap:4px;min-height:200px;justify-content:flex-start;padding:12px;background:#060c18;border:1px solid var(--border);border-radius:10px"></div>
+      <div id="stackStatus" style="margin-top:8px;font-family:'JetBrains Mono';font-size:13px;color:var(--muted)">Stack: Empty (SP=0)</div>
+    </div>
+    <div class="card">
+      <div class="card-title">📋 RTL for Stack Operations</div>
+      <div class="formula-box" style="margin-bottom:10px">
+        <span style="color:var(--green)">PUSH X:</span><br>
+        <span style="color:#94a3b8">SP ← SP + 1</span><br>
+        <span style="color:#94a3b8">M[SP] ← X</span>
+      </div>
+      <div class="formula-box" style="margin-bottom:10px">
+        <span style="color:var(--pink)">POP (to R):</span><br>
+        <span style="color:#94a3b8">R ← M[SP]</span><br>
+        <span style="color:#94a3b8">SP ← SP − 1</span>
+      </div>
+      <div style="margin-top:14px;font-size:13px;color:#94a3b8">
+        <div style="margin-bottom:8px"><strong style="color:var(--gold)">SP (Stack Pointer)</strong>: Points to top of stack</div>
+        <div style="margin-bottom:8px"><strong style="color:var(--cyan)">Full Stack</strong>: SP points to last filled location</div>
+        <div><strong style="color:var(--pink)">Stack Overflow</strong>: Push to full stack</div>
+      </div>
+      <div style="margin-top:14px;background:#0a1525;border-radius:10px;padding:14px">
+        <div style="color:var(--cyan);font-weight:700;margin-bottom:8px;font-size:13px">Zero-Address Instructions (RPN)</div>
+        <div style="font-family:'JetBrains Mono';font-size:12px;color:#94a3b8">
+          Evaluate: (3 + 4) × 5<br><br>
+          <span style="color:var(--gold)">PUSH 3</span> → stack: [3]<br>
+          <span style="color:var(--gold)">PUSH 4</span> → stack: [3,4]<br>
+          <span style="color:var(--green)">ADD</span>    → pop 3,4, push 7<br>
+          <span style="color:var(--gold)">PUSH 5</span> → stack: [7,5]<br>
+          <span style="color:var(--green)">MUL</span>    → pop 7,5, push 35<br>
+          <span style="color:var(--cyan)">POP→R1</span> → R1 = 35 ✓
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-footer">
+    <button onclick="show(10)">← Processor Organization</button>
+    <span class="counter">12 / 15</span>
+    <button onclick="show(12)">Instruction Formats →</button>
+  </div>
+  `;
+
+  let stack = [], maxSize = 8;
+  window.stackPush = function() {
+    const v = parseInt(document.getElementById('pushVal').value);
+    if(isNaN(v)) return;
+    if(stack.length >= maxSize) { document.getElementById('stackStatus').innerHTML='<span style="color:var(--pink)">⚠ Stack Overflow!</span>'; return; }
+    stack.push(v);
+    renderStack();
+    document.getElementById('stackStatus').innerHTML = `<span style="color:var(--green)">PUSHED ${v} → SP=${stack.length}</span>`;
+  };
+  window.stackPop = function() {
+    if(stack.length===0) { document.getElementById('stackStatus').innerHTML='<span style="color:var(--pink)">⚠ Stack Underflow!</span>'; return; }
+    const v = stack.pop();
+    renderStack();
+    document.getElementById('stackStatus').innerHTML = `<span style="color:var(--pink)">POPPED ${v} → SP=${stack.length}</span>`;
+  };
+  window.stackPeek = function() {
+    if(stack.length===0) return;
+    document.getElementById('stackStatus').innerHTML = `<span style="color:var(--gold)">TOP = ${stack[stack.length-1]}</span>`;
+  };
+  window.stackClear = function() { stack=[]; renderStack(); document.getElementById('stackStatus').textContent='Stack cleared. SP=0'; };
+  function renderStack() {
+    const viz = document.getElementById('stackViz');
+    if(stack.length===0) { viz.innerHTML='<div style="color:#334155;font-size:13px;text-align:center;align-self:center">Empty stack</div>'; return; }
+    viz.innerHTML = stack.map((v,i) => {
+      const isTop = i===stack.length-1;
+      return `<div style="display:flex;gap:10px;align-items:center">
+        <span style="color:var(--muted);font-family:'JetBrains Mono';font-size:11px;min-width:40px">SP=${i+1}</span>
+        <div style="flex:1;background:${isTop?'#001a2a':'#0b1626'};border:${isTop?'2px solid var(--cyan)':'1px solid var(--border)'};border-radius:8px;padding:8px 14px;display:flex;justify-content:space-between;align-items:center">
+          <span style="color:${isTop?'var(--cyan)':'var(--text)'};font-family:'JetBrains Mono';font-weight:${isTop?700:400}">${v}</span>
+          ${isTop?'<span class="tag tag-cyan">← TOP</span>':''}
+        </div>
+      </div>`;
+    }).join('');
+  }
+  renderStack();
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PAGE 12: Instruction Formats
+// ─────────────────────────────────────────────────────────────────────────────
+function buildPage12(el) {
+  el.innerHTML = `
+  <div class="topic-header">
+    <div class="topic-tag">Unit 4 · Instructions</div>
+    <div class="topic-title" style="background:linear-gradient(90deg,var(--blue),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Instruction Formats: 3, 2, 1, 0 Address</div>
+    <div class="topic-desc">An instruction tells the CPU what to do (opcode) and where to find the data (operands). The number of address fields determines memory usage and program size.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🔄 Compare All Formats</div>
+    <div style="font-size:13px;color:#94a3b8;margin-bottom:16px">
+      Expression to evaluate: <strong style="color:var(--gold)">X = (A + B) × (C + D)</strong>
+    </div>
+    ${[
+      {
+        n:3, title:'3-Address Instructions', color:'var(--cyan)',
+        bits:[{l:'OPCODE',w:4,c:'var(--pink)'},{l:'DEST',w:4,c:'var(--gold)'},{l:'SRC1',w:4,c:'var(--green)'},{l:'SRC2',w:4,c:'var(--cyan)'}],
+        prog: ['ADD R1, A, B   ; R1 = A + B','ADD R2, C, D   ; R2 = C + D','MUL X,  R1, R2  ; X  = R1 × R2'],
+        note:'3 instructions needed. Shortest program. Best for RISC.',
+        pros:'Few instructions, no need for temp vars', cons:'Long instruction (more bits per instruction)'
+      },
+      {
+        n:2, title:'2-Address Instructions', color:'var(--gold)',
+        bits:[{l:'OPCODE',w:4,c:'var(--pink)'},{l:'DEST/SRC1',w:6,c:'var(--gold)'},{l:'SRC2',w:6,c:'var(--cyan)'}],
+        prog: ['MOV R1, A      ; R1 = A','ADD R1, B      ; R1 = A+B','MOV R2, C      ; R2 = C','ADD R2, D      ; R2 = C+D','MUL R1, R2     ; R1 = R1×R2','MOV X,  R1     ; X  = result'],
+        note:'Dest doubles as source. x86 architecture style.',
+        pros:'Common, balanced', cons:'Destination is overwritten'
+      },
+      {
+        n:1, title:'1-Address Instructions', color:'var(--green)',
+        bits:[{l:'OPCODE',w:8,c:'var(--pink)'},{l:'ADDRESS',w:8,c:'var(--green)'}],
+        prog: ['LOAD  A        ; AC = A','ADD   B        ; AC = AC + B','STORE T        ; T = AC','LOAD  C        ; AC = C','ADD   D        ; AC = AC + D','MUL   T        ; AC = AC × T','STORE X        ; X = AC'],
+        note:'Uses implicit Accumulator (AC) register. Legacy CISC.',
+        pros:'Simple instruction encoding', cons:'Many instructions needed, AC is bottleneck'
+      },
+      {
+        n:0, title:'0-Address Instructions (Stack)', color:'var(--purple)',
+        bits:[{l:'OPCODE ONLY',w:16,c:'var(--purple)'}],
+        prog: ['PUSH  A        ; Stack: [A]','PUSH  B        ; Stack: [A,B]','ADD            ; Stack: [A+B]','PUSH  C        ; Stack: [A+B,C]','PUSH  D        ; Stack: [A+B,C,D]','ADD            ; Stack: [A+B,C+D]','MUL            ; Stack: [(A+B)*(C+D)]','POP   X        ; X = result'],
+        note:'Operands implicit on stack. JVM, PostScript style.',
+        pros:'Very short instructions', cons:'Most instructions needed'
+      },
+    ].map(f=>`
+      <div style="background:var(--card);border:1px solid ${f.color}44;border-radius:12px;padding:18px;margin-bottom:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+          <div style="color:${f.color};font-weight:700;font-size:16px">${f.title}</div>
+          <span class="tag" style="background:${f.color}15;color:${f.color};border-color:${f.color}44">${f.n} address field${f.n!==1?'s':''}</span>
+        </div>
+        <!-- Instruction format visualization -->
+        <div style="display:flex;gap:3px;margin-bottom:14px">
+          ${f.bits.map(b=>`<div style="flex:${b.w};background:#060c18;border:2px solid ${b.c};border-radius:7px;padding:8px 4px;text-align:center;min-width:40px">
+            <div style="color:${b.c};font-family:'JetBrains Mono';font-size:11px;font-weight:700">${b.l}</div>
+            <div style="color:#475569;font-size:10px">${b.w*2} bits</div>
+          </div>`).join('')}
+        </div>
+        <!-- Program -->
+        <div style="background:#060c18;border-radius:9px;padding:14px;font-family:'JetBrains Mono';font-size:12px;margin-bottom:12px">
+          ${f.prog.map((line,i)=>`<div style="color:#94a3b8;margin-bottom:4px"><span style="color:#334155;margin-right:12px">${i+1}.</span>${line}</div>`).join('')}
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <span class="tag tag-green">✓ ${f.pros}</span>
+          <span class="tag tag-pink">✗ ${f.cons}</span>
+        </div>
+      </div>
+    `).join('')}
+  </div>
+
+  <div class="nav-footer">
+    <button onclick="show(11)">← Stack Organization</button>
+    <span class="counter">13 / 15</span>
+    <button onclick="show(13)">Addressing Modes →</button>
+  </div>
+  `;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PAGE 13: Addressing Modes
+// ─────────────────────────────────────────────────────────────────────────────
+function buildPage13(el) {
+  const modes = [
+    {
+      name:'Immediate', sym:'#', color:'var(--orange)',
+      example:'MOV R1, #25', ea:'EA = not used (25 IS the data)',
+      desc:'The operand is a constant embedded directly in the instruction.',
+      memory:'No memory access', speed:'Fastest',
+      diagram: `<text x="100" y="50" text-anchor="middle" fill="var(--orange)" font-family="'JetBrains Mono'" font-size="13">Instruction</text>
+        <rect x="30" y="60" width="80" height="35" rx="6" fill="#0b1626" stroke="var(--pink)" stroke-width="1.5"/>
+        <text x="70" y="82" text-anchor="middle" fill="var(--pink)" font-family="'JetBrains Mono'" font-size="10">OPCODE</text>
+        <rect x="120" y="60" width="80" height="35" rx="6" fill="#2a1000" stroke="var(--orange)" stroke-width="2"/>
+        <text x="160" y="82" text-anchor="middle" fill="var(--orange)" font-family="'JetBrains Mono'" font-size="12" font-weight="700">#25</text>
+        <text x="160" y="115" text-anchor="middle" fill="var(--orange)" font-family="'Sora'" font-size="9">← DATA IS HERE</text>`
+    },
+    {
+      name:'Direct (Absolute)', sym:'addr', color:'var(--green)',
+      example:'MOV R1, 200', ea:'EA = 200 → fetch M[200]',
+      desc:'Operand field contains the memory address where data lives.',
+      memory:'1 memory access', speed:'Fast',
+      diagram: `<rect x="30" y="60" width="70" height="35" rx="6" fill="#0b1626" stroke="var(--pink)" stroke-width="1.5"/>
+        <text x="65" y="80" text-anchor="middle" fill="var(--pink)" font-family="'JetBrains Mono'" font-size="10">OPCODE</text>
+        <rect x="110" y="60" width="70" height="35" rx="6" fill="#0b1626" stroke="var(--green)" stroke-width="1.5"/>
+        <text x="145" y="80" text-anchor="middle" fill="var(--green)" font-family="'JetBrains Mono'" font-size="10">Addr=200</text>
+        <line x1="145" y1="95" x2="145" y2="115" stroke="var(--green)" stroke-width="1.5" marker-end="url(#arr)"/>
+        <rect x="90" y="118" width="110" height="30" rx="6" fill="#0a2a1a" stroke="var(--green)" stroke-width="1.5"/>
+        <text x="145" y="137" text-anchor="middle" fill="var(--green)" font-family="'JetBrains Mono'" font-size="10">M[200] = DATA</text>`
+    },
+    {
+      name:'Indirect', sym:'@', color:'var(--purple)',
+      example:'MOV R1, @200', ea:'EA = M[200] → fetch M[M[200]]',
+      desc:'Address field contains address of the address. Two memory lookups.',
+      memory:'2 memory accesses', speed:'Slower',
+      diagram: `<rect x="10" y="55" width="65" height="30" rx="5" fill="#0b1626" stroke="var(--pink)" stroke-width="1.2"/>
+        <text x="42" y="73" text-anchor="middle" fill="var(--pink)" font-family="'JetBrains Mono'" font-size="9">OPCODE</text>
+        <rect x="82" y="55" width="65" height="30" rx="5" fill="#0b1626" stroke="var(--purple)" stroke-width="1.2"/>
+        <text x="114" y="73" text-anchor="middle" fill="var(--purple)" font-family="'JetBrains Mono'" font-size="9">Addr=200</text>
+        <line x1="114" y1="85" x2="114" y2="100" stroke="var(--purple)" stroke-width="1.5" marker-end="url(#arr)"/>
+        <rect x="70" y="103" width="88" height="26" rx="5" fill="#150a2a" stroke="var(--purple)" stroke-width="1.2"/>
+        <text x="114" y="119" text-anchor="middle" fill="var(--purple)" font-family="'JetBrains Mono'" font-size="9">M[200]=500</text>
+        <line x1="159" y1="116" x2="185" y2="116" stroke="var(--purple)" stroke-width="1.5" marker-end="url(#arr)"/>
+        <rect x="187" y="103" width="88" height="26" rx="5" fill="#001a2a" stroke="var(--cyan)" stroke-width="1.2"/>
+        <text x="231" y="119" text-anchor="middle" fill="var(--cyan)" font-family="'JetBrains Mono'" font-size="9">M[500]=DATA</text>`
+    },
+    {
+      name:'Register', sym:'Rn', color:'var(--gold)',
+      example:'MOV R1, R2', ea:'EA = R2 (register, not memory)',
+      desc:'Operand is in a register. No memory access needed at all.',
+      memory:'No memory access', speed:'Fastest (no mem)',
+      diagram: `<rect x="30" y="55" width="70" height="30" rx="5" fill="#0b1626" stroke="var(--pink)" stroke-width="1.2"/>
+        <text x="65" y="73" text-anchor="middle" fill="var(--pink)" font-family="'JetBrains Mono'" font-size="9">OPCODE</text>
+        <rect x="110" y="55" width="70" height="30" rx="5" fill="#0b1626" stroke="var(--gold)" stroke-width="1.5"/>
+        <text x="145" y="73" text-anchor="middle" fill="var(--gold)" font-family="'JetBrains Mono'" font-size="10">R2</text>
+        <line x1="145" y1="85" x2="145" y2="103" stroke="var(--gold)" stroke-width="2" marker-end="url(#arrg)"/>
+        <rect x="90" y="106" width="110" height="30" rx="8" fill="#1a1200" stroke="var(--gold)" stroke-width="2"/>
+        <text x="145" y="124" text-anchor="middle" fill="var(--gold)" font-family="'JetBrains Mono'" font-size="10" font-weight="700">Register R2 = DATA</text>`
+    },
+    {
+      name:'Register Indirect', sym:'(Rn)', color:'var(--cyan)',
+      example:'MOV R1, (R2)', ea:'EA = M[R2]',
+      desc:'Register holds the address of the operand in memory.',
+      memory:'1 memory access', speed:'Moderate',
+      diagram: `<rect x="10" y="55" width="65" height="30" rx="5" fill="#0b1626" stroke="var(--pink)" stroke-width="1.2"/>
+        <text x="42" y="73" text-anchor="middle" fill="var(--pink)" font-family="'JetBrains Mono'" font-size="9">OPCODE</text>
+        <rect x="82" y="55" width="65" height="30" rx="5" fill="#0b1626" stroke="var(--cyan)" stroke-width="1.5"/>
+        <text x="114" y="73" text-anchor="middle" fill="var(--cyan)" font-family="'JetBrains Mono'" font-size="9">(R2)</text>
+        <rect x="190" y="45" width="80" height="30" rx="7" fill="#001a2a" stroke="var(--cyan)" stroke-width="1.5"/>
+        <text x="230" y="63" text-anchor="middle" fill="var(--cyan)" font-family="'JetBrains Mono'" font-size="9">R2 = 500</text>
+        <line x1="230" y1="75" x2="230" y2="95" stroke="var(--cyan)" stroke-width="1.5" marker-end="url(#arr)"/>
+        <rect x="180" y="98" width="100" height="28" rx="6" fill="#0a1525" stroke="var(--green)" stroke-width="1.5"/>
+        <text x="230" y="115" text-anchor="middle" fill="var(--green)" font-family="'JetBrains Mono'" font-size="9">M[500] = DATA</text>`
+    },
+    {
+      name:'Indexed', sym:'X(Rn)', color:'var(--pink)',
+      example:'MOV R1, 4(R2)', ea:'EA = R2 + 4',
+      desc:'Effective address = base register + constant offset. Great for arrays.',
+      memory:'1 memory access', speed:'Moderate',
+      diagram: `<rect x="10" y="55" width="60" height="30" rx="5" fill="#0b1626" stroke="var(--pink)" stroke-width="1.2"/>
+        <text x="40" y="72" text-anchor="middle" fill="var(--pink)" font-family="'JetBrains Mono'" font-size="9">OPCODE</text>
+        <rect x="76" y="55" width="40" height="30" rx="5" fill="#0b1626" stroke="var(--gold)" stroke-width="1.2"/>
+        <text x="96" y="72" text-anchor="middle" fill="var(--gold)" font-family="'JetBrains Mono'" font-size="9">+4</text>
+        <rect x="122" y="55" width="40" height="30" rx="5" fill="#0b1626" stroke="var(--pink)" stroke-width="1.2"/>
+        <text x="142" y="72" text-anchor="middle" fill="var(--pink)" font-family="'JetBrains Mono'" font-size="9">R2</text>
+        <text x="200" y="68" fill="#475569" font-family="'JetBrains Mono'" font-size="14">+</text>
+        <rect x="170" y="45" width="55" height="26" rx="5" fill="#001a2a" stroke="var(--cyan)" stroke-width="1.2"/>
+        <text x="197" y="61" text-anchor="middle" fill="var(--cyan)" font-family="'JetBrains Mono'" font-size="9">R2=100</text>
+        <text x="243" y="62" fill="var(--gold)" font-family="'JetBrains Mono'" font-size="11">→ EA=104</text>
+        <line x1="260" y1="70" x2="260" y2="90" stroke="var(--pink)" stroke-width="1.5" marker-end="url(#arr)"/>
+        <rect x="210" y="93" width="100" height="26" rx="6" fill="#2a0014" stroke="var(--pink)" stroke-width="1.5"/>
+        <text x="260" y="109" text-anchor="middle" fill="var(--pink)" font-family="'JetBrains Mono'" font-size="9">M[104] = DATA</text>`
+    },
+  ];
+
+  let selMode = 0;
+  el.innerHTML = `
+  <div class="topic-header">
+    <div class="topic-tag">Unit 4 · Instructions</div>
+    <div class="topic-title" style="background:linear-gradient(90deg,var(--orange),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Addressing Modes</div>
+    <div class="topic-desc">Addressing modes define <strong>how to locate the operand</strong>. The CPU uses the mode bits in the instruction to compute the Effective Address (EA).</div>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px">
+    ${modes.map((m,i)=>`<button class="btn" onclick="selAddrMode(${i})" id="addrBtn${i}" style="border-color:${m.color};color:${m.color}">${m.name}</button>`).join('')}
+  </div>
+  <div id="addrModeDisplay"></div>
+
+  <div class="card" style="margin-top:20px">
+    <div class="card-title">📊 Quick Reference Table</div>
+    <table class="truth-table">
+      <tr><th>Mode</th><th>Symbol</th><th>Effective Address</th><th>Memory Accesses</th><th>Speed</th></tr>
+      ${modes.map(m=>`
+        <tr>
+          <td style="color:${m.color};font-weight:700">${m.name}</td>
+          <td class="mono" style="color:${m.color}">${m.sym}</td>
+          <td style="color:#94a3b8;font-size:12px">${m.ea}</td>
+          <td style="color:var(--muted);font-size:12px">${m.memory}</td>
+          <td><span class="tag" style="background:${m.speed.includes('Fast')?'#0a2a1a':'#1a0a2a'};color:${m.speed.includes('Fast')?'var(--green)':'var(--muted)'};border-color:#1a3050">${m.speed}</span></td>
+        </tr>
+      `).join('')}
+    </table>
+  </div>
+
+  <div class="nav-footer">
+    <button onclick="show(12)">← Instruction Formats</button>
+    <span class="counter">14 / 15</span>
+    <button onclick="show(14)">Micro-operations →</button>
+  </div>
+  `;
+
+  window.selAddrMode = function(i) {
+    selMode = i;
+    document.querySelectorAll('[id^=addrBtn]').forEach((b,j) => {
+      b.classList.toggle('active', j===i);
+    });
+    const m = modes[i];
+    document.getElementById('addrModeDisplay').innerHTML = `
+      <div class="card" style="border-color:${m.color}44">
+        <div style="display:flex;gap:16px;align-items:center;margin-bottom:16px;flex-wrap:wrap">
+          <div style="width:60px;height:60px;border-radius:14px;background:${m.color}15;border:2px solid ${m.color};display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono';color:${m.color};font-size:15px;font-weight:700">${m.sym}</div>
+          <div>
+            <div style="color:${m.color};font-size:20px;font-weight:800">${m.name}</div>
+            <div style="color:#64748b;font-size:13px">${m.desc}</div>
+          </div>
+        </div>
+        <div class="grid2">
+          <div>
+            <div class="formula-box" style="margin-bottom:10px"><span style="color:#64748b;font-size:11px">Assembly Example</span><br><span style="color:${m.color};font-size:16px;font-weight:700">${m.example}</span></div>
+            <div style="background:${m.color}11;border:1px solid ${m.color}44;border-radius:10px;padding:12px">
+              <div style="color:${m.color};font-weight:700;font-size:12px;margin-bottom:4px">Effective Address</div>
+              <div style="color:#ccc;font-size:13px">${m.ea}</div>
+            </div>
+          </div>
+          <svg width="100%" viewBox="0 0 320 160">
+            <defs>
+              <marker id="arr" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0 0, 7 2.5, 0 5" fill="${m.color}"/></marker>
+              <marker id="arrg" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0 0, 7 2.5, 0 5" fill="var(--green)"/></marker>
+            </defs>
+            ${m.diagram}
+          </svg>
+        </div>
+      </div>
+    `;
+  };
+  selAddrMode(0);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PAGE 14: Micro-operations
+// ─────────────────────────────────────────────────────────────────────────────
+function buildPage14(el) {
+  el.innerHTML = `
+  <div class="topic-header">
+    <div class="topic-tag">Unit 4 · Micro-operations</div>
+    <div class="topic-title" style="background:linear-gradient(90deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Micro-operations</div>
+    <div class="topic-desc">Micro-operations are the elementary operations performed on data stored in registers during one clock cycle. They are the building blocks of all CPU instructions.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🔢 Arithmetic Micro-operations</div>
+    <div class="grid2">
+      <div>
+        <table class="truth-table">
+          <tr><th>Symbolic</th><th>Description</th></tr>
+          <tr><td class="mono" style="color:var(--green)">R3 ← R1 + R2</td><td>Add</td></tr>
+          <tr><td class="mono" style="color:var(--green)">R3 ← R1 + R2 + 1</td><td>Add + 1 (carry)</td></tr>
+          <tr><td class="mono" style="color:var(--pink)">R3 ← R1 − R2</td><td>Subtract</td></tr>
+          <tr><td class="mono" style="color:var(--pink)">R3 ← R1 + R̄2 + 1</td><td>Subtract (2's comp)</td></tr>
+          <tr><td class="mono" style="color:var(--gold)">R3 ← R1 + 1</td><td>Increment</td></tr>
+          <tr><td class="mono" style="color:var(--gold)">R3 ← R1 − 1</td><td>Decrement</td></tr>
+          <tr><td class="mono" style="color:var(--cyan)">R3 ← R1</td><td>Transfer</td></tr>
+          <tr><td class="mono" style="color:var(--muted)">R3 ← 0</td><td>Clear</td></tr>
+        </table>
+      </div>
+      <div>
+        <div style="color:var(--gold);font-weight:700;margin-bottom:12px;font-size:13px">Interactive ALU Demo</div>
+        <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+          <div style="display:flex;gap:6px;align-items:center"><span style="color:var(--gold)">R1:</span><input type="number" value="10" id="muR1" style="width:65px" oninput="updateMU()"></div>
+          <div style="display:flex;gap:6px;align-items:center"><span style="color:var(--cyan)">R2:</span><input type="number" value="6" id="muR2" style="width:65px" oninput="updateMU()"></div>
+        </div>
+        <div id="muResults" style="display:flex;flex-direction:column;gap:6px"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🔵 Logical Micro-operations</div>
+    <div class="grid2">
+      <div>
+        <table class="truth-table">
+          <tr><th>Symbolic</th><th>Operation</th><th>Example (A=1010, B=1100)</th></tr>
+          <tr><td class="mono" style="color:var(--cyan)">R3 ← R1 ∧ R2</td><td>AND</td><td class="mono" style="color:var(--cyan)">1000</td></tr>
+          <tr><td class="mono" style="color:var(--green)">R3 ← R1 ∨ R2</td><td>OR</td><td class="mono" style="color:var(--green)">1110</td></tr>
+          <tr><td class="mono" style="color:var(--gold)">R3 ← R1 ⊕ R2</td><td>XOR</td><td class="mono" style="color:var(--gold)">0110</td></tr>
+          <tr><td class="mono" style="color:var(--pink)">R3 ← R̄1</td><td>NOT (complement)</td><td class="mono" style="color:var(--pink)">0101</td></tr>
+        </table>
+        <div style="margin-top:14px;background:#0a1525;border-radius:9px;padding:12px;font-size:13px">
+          <div style="color:var(--cyan);font-weight:700;margin-bottom:8px">Applications:</div>
+          <div style="color:#94a3b8;line-height:2">
+            <strong>AND</strong>: Masking (select bits) — <code>A & 0x0F</code> gets lower nibble<br>
+            <strong>OR</strong>: Setting bits — <code>A | 0x80</code> sets MSB<br>
+            <strong>XOR</strong>: Toggling bits, clearing (A⊕A=0)<br>
+            <strong>NOT</strong>: 1's complement, inverting
+          </div>
+        </div>
+      </div>
+      <div id="logicDemo">
+        <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+          <div style="display:flex;gap:6px;align-items:center"><span style="color:var(--gold)">A:</span><input type="number" value="10" id="lgA" style="width:65px" oninput="updateLogic()"></div>
+          <div style="display:flex;gap:6px;align-items:center"><span style="color:var(--cyan)">B:</span><input type="number" value="12" id="lgB" style="width:65px" oninput="updateLogic()"></div>
+        </div>
+        <div id="lgResults"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">↔ Shift Micro-operations</div>
+    <div class="grid2">
+      <div>
+        <table class="truth-table">
+          <tr><th>Type</th><th>Left Shift</th><th>Right Shift</th></tr>
+          <tr>
+            <td style="color:var(--gold)">Logical</td>
+            <td class="mono" style="color:var(--green)">shl R  (0 in from right)</td>
+            <td class="mono" style="color:var(--green)">shr R  (0 in from left)</td>
+          </tr>
+          <tr>
+            <td style="color:var(--gold)">Arithmetic</td>
+            <td class="mono" style="color:var(--cyan)">ashl R (same as logical)</td>
+            <td class="mono" style="color:var(--cyan)">ashr R (sign bit replicated)</td>
+          </tr>
+          <tr>
+            <td style="color:var(--gold)">Circular/Rotate</td>
+            <td class="mono" style="color:var(--purple)">rol R  (wrap MSB→LSB)</td>
+            <td class="mono" style="color:var(--purple)">ror R  (wrap LSB→MSB)</td>
+          </tr>
+        </table>
+        <div class="formula-box" style="margin-top:12px">
+          Left shift by 1 = × 2<br>
+          Right shift by 1 = ÷ 2<br>
+          <span style="color:var(--pink)">Arithmetic right shift preserves sign!</span>
+        </div>
+      </div>
+      <div id="shiftDemo">
+        <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;align-items:center">
+          <span style="color:var(--gold)">Value:</span>
+          <input type="number" value="45" id="shiftVal" style="width:80px" oninput="updateShift()">
+          <span style="color:var(--muted);font-size:12px">(8-bit)</span>
+        </div>
+        <div id="shiftResults"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-footer">
+    <button onclick="show(13)">← Addressing Modes</button>
+    <span class="counter">15 / 15</span>
+    <button disabled>End of Syllabus ✓</button>
+  </div>
+  `;
+
+  window.updateMU = function() {
+    const r1 = parseInt(document.getElementById('muR1').value)||0;
+    const r2 = parseInt(document.getElementById('muR2').value)||0;
+    const ops = [
+      { sym:`R1 + R2`, val: r1+r2, c:'var(--green)' },
+      { sym:`R1 − R2`, val: r1-r2, c:'var(--pink)' },
+      { sym:`R1 + 1`, val: r1+1, c:'var(--gold)' },
+      { sym:`R1 − 1`, val: r1-1, c:'var(--gold)' },
+      { sym:`R2 + 1`, val: r2+1, c:'var(--cyan)' },
+    ];
+    document.getElementById('muResults').innerHTML = ops.map(o=>`
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#0a1525;border-radius:8px">
+        <span class="mono" style="color:${o.c};font-size:13px">${o.sym}</span>
+        <span class="mono" style="color:var(--gold);font-weight:700">${o.val}</span>
+      </div>
+    `).join('');
+  };
+  updateMU();
+
+  window.updateLogic = function() {
+    const a = parseInt(document.getElementById('lgA').value)||0;
+    const b = parseInt(document.getElementById('lgB').value)||0;
+    const toBin = v => ((v%256+256)%256).toString(2).padStart(8,'0');
+    const ops = [
+      { name:'AND', val: a&b, c:'var(--cyan)' },
+      { name:'OR', val: a|b, c:'var(--green)' },
+      { name:'XOR', val: a^b, c:'var(--gold)' },
+      { name:'NOT A', val: (~a)&0xFF, c:'var(--pink)' },
+    ];
+    document.getElementById('lgResults').innerHTML = `
+      <div style="font-family:'JetBrains Mono';font-size:12px;margin-bottom:8px">
+        <div style="color:var(--gold)">A = ${a} = ${toBin(a)}</div>
+        <div style="color:var(--cyan)">B = ${b} = ${toBin(b)}</div>
+      </div>
+      ${ops.map(o=>`
+        <div style="display:flex;justify-content:space-between;padding:7px 12px;background:#0a1525;border-radius:8px;margin-bottom:4px">
+          <span class="mono" style="color:${o.c}">${o.name}</span>
+          <span class="mono" style="color:${o.c}">${o.val} = ${toBin(o.val)}</span>
+        </div>
+      `).join('')}
+    `;
+  };
+  updateLogic();
+
+  window.updateShift = function() {
+    const v = parseInt(document.getElementById('shiftVal').value)||0;
+    const b = ((v%256+256)%256);
+    const toBin = x => ((x%256+256)%256).toString(2).padStart(8,'0');
+    const sign = (b>>7)&1;
+    const ops = [
+      { name:'shl (× 2)', val: (b<<1)&0xFF, c:'var(--green)', note:`LSB=0 filled` },
+      { name:'shr (÷ 2)', val: b>>1, c:'var(--green)', note:`MSB=0 filled` },
+      { name:'ashr (arith ÷2)', val: sign ? ((b>>1)|0x80) : b>>1, c:'var(--cyan)', note:`MSB=${sign} replicated` },
+      { name:'rol', val: ((b<<1)|(b>>7))&0xFF, c:'var(--purple)', note:`MSB wraps to LSB` },
+      { name:'ror', val: ((b>>1)|(b<<7))&0xFF, c:'var(--purple)', note:`LSB wraps to MSB` },
+    ];
+    document.getElementById('shiftResults').innerHTML = `
+      <div class="mono" style="font-size:12px;color:var(--gold);margin-bottom:8px">Input: ${v} = ${toBin(b)}</div>
+      ${ops.map(o=>`
+        <div style="display:flex;justify-content:space-between;padding:7px 12px;background:#0a1525;border-radius:8px;margin-bottom:4px;flex-wrap:wrap;gap:4px">
+          <span class="mono" style="color:${o.c};font-size:12px">${o.name}</span>
+          <span class="mono" style="color:var(--text);font-size:11px">${toBin(o.val)}</span>
+          <span style="color:var(--muted);font-size:11px">${o.val} (${o.note})</span>
+        </div>
+      `).join('')}
+    `;
+  };
+  updateShift();
+}
+</script>
+</body>
+</html>
